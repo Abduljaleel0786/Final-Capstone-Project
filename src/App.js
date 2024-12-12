@@ -1,14 +1,13 @@
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
+import Homepage from "./Home_Page/home-page";
 
 
 
 function App() {
   return (
-    <div className="App">
-      <h1> hello brother</h1>
-    </div>
+    <Homepage/>
   );
 }
 
