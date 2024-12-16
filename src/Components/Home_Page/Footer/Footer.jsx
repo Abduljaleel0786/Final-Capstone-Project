@@ -10,7 +10,7 @@ import {
   TextField,
 } from '@mui/material';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Mobile from '../../Images/home-foodpanda-apps.webp';
+import Mobile from '../../../Images/home-foodpanda-apps.webp';
 
 
 
