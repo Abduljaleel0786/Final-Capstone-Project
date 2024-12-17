@@ -5,19 +5,22 @@ import Card from './CardCity/Card'
 import HeroSection from './HeroSection/HeroSection'
 import OnlineOrder from './OnlineOrder/OnlineOrder'
 import CookerPage from './CookerPage/CookerPage'
+import LunchPage from './LunchPage/LunchPage'
+import AboutPage from './AboutPage/AboutPage'
 
 const Homepage = () => {
   return (
     <>
-       <Navbar />
+      <Navbar />
        <HeroSection />
-      < CookerPage/>
-       <Card />  
-      <OnlineOrder/> 
-     
+      <CookerPage />
+      <Card />
+      <OnlineOrder />
+      <LunchPage /> 
+      <AboutPage />
+      <Footer />
 
-      {/* <Footer /> */}
-      {/* <Resturant /> */}
+
 
     </>
   )

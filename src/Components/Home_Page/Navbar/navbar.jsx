@@ -92,8 +92,10 @@ function Navbar() {
                                         sx={{
                                             color: '#000',
                                             fontSize: isMobile ? '12px' : '14px',
-                                            borderRadius: '20px',
-                                            '&:hover': { backgroundColor: '#f0f0f0' },
+                                            borderRadius: '8px',
+                                            border:"1px solid Black",
+                                           margin:'0px 8px',
+                                           padding:'5px 12px',
                                         }}
                                     >
                                         Log In
@@ -106,8 +108,8 @@ function Navbar() {
                                             backgroundColor: '#e21b70',
                                             color: '#fff',
                                             fontSize: isMobile ? '12px' : '14px',
-                                            borderRadius: '20px',
-                                            '&:hover': { backgroundColor: '#c2185b' },
+                                            borderRadius: '8px',
+                                            padding:'5px 12px',
                                         }}
                                     >
                                         Sign Up
@@ -135,21 +137,23 @@ function Navbar() {
                                         <Box
                                             sx={{
                                                 position: 'absolute',
-                                                top: '50%',
-                                                left: '50%',
+                                                top: '18%',
+                                                right: '14%',
                                                 transform: 'translate(-50%, -50%)',
-                                                width: 200,
+                                                width: 150,
                                                 bgcolor: 'background.paper',
                                                 boxShadow: 24,
                                                 borderRadius: 2,
-                                                p: 2,
+                                                p: 1,
                                                 textAlign: 'center',
                                             }}
                                         >
-                                            <Typography variant="body2" sx={{ mb: 1 }}>
+                                           <Box style={{backgroundColor:'#f7f7f7'}} className='d-flex justify-content-between py-3 px-3 rounded-3'> 
+                                           <Typography variant="body2" sx={{ mb: 1 }}>
                                                 English
                                             </Typography>
-                                            <CheckCircleOutlineIcon sx={{ color: '#e21b70' }} />
+                                            <CheckCircleOutlineIcon  sx={{ color: '#e21b70' }} />
+                                           </Box>
                                         </Box>
                                     </Modal>
                                 </Grid>

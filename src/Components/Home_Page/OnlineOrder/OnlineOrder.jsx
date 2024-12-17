@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Grid, Typography, Box, Button } from '@mui/material';
 import Mobile from '../../../Images/home-foodpanda-apps.webp';
-import AppGallery from '../../../Images/appgalarey.jpg';
+import AppGallery from '../../../Images/appgalarey.png';
 import PlayStore from '../../../Images/playstore.png';
 import Scanner from '../../../Images/scanner.png';
 import AppleIcon from '@mui/icons-material/Apple';
@@ -28,21 +28,21 @@ const OnlineOrder = () => {
             >
               Download the food and groceries you love
             </Typography>
-            <Box className="d-flex align-items-center mb-2 mt-4">
+            <Box className="d-flex align-items-center mb-2 mt-3">
               <Box className="border me-3">
-                <img className="p-2" src={Scanner} alt="Scanner" style={{ maxWidth: '100px' }} />
+                <img className="p-2 d-none d-lg-block d-md-block" src={Scanner} alt="Scanner" style={{ maxWidth: '100px' }} />
               </Box>
               <Typography
                 className="text-white"
-                style={{ fontSize: '1rem' }}
+      
               >
-                It's all at your fingertips – the restaurants and <br /> shops you love. Find the right food and <br /> groceries to suit your mood, and make the <br /> first bite last. Go ahead, download us.
+                It's all at your fingertips – the restaurants and <br /> shops you love. Find the right food and <br/> groceries to suit your mood, and make the <br /> first bite last. Go ahead, download us.
               </Typography>
             </Box>
 
             {/* Buttons */}
 
-            <Box className="py-5">
+            <Box className="py-4 mb-3">
 
               <Grid container spacing={1} justify="center">
 
@@ -53,14 +53,14 @@ const OnlineOrder = () => {
                     color="primary"
                   
                     className="d-flex align-items-center rounded-3 w-100"
-                    style={{ backgroundColor: 'black', padding: '15px 3px' }}
+                    style={{ backgroundColor: 'black', padding: '5px 0px' }}
                   >
                     < AppleIcon />
                     <Box ml={2}>
-                      <Typography className="text-white" variant="">
+                      <Typography style={{fontSize:"10px"}} className="text-white" variant="">
                         Download on the
                       </Typography>
-                      <Typography className="text-white font-weight-bold">
+                      <Typography style={{fontSize:"15px"}} className="text-white font-weight-bold">
                         App Store
                       </Typography>
                     </Box>
@@ -74,15 +74,15 @@ const OnlineOrder = () => {
                     color="primary"
                  
                     className="d-flex align-items-center rounded-3 w-100"
-                    style={{ backgroundColor: 'black', padding: '15px 3px' }}
+                    style={{ backgroundColor: 'black', padding: '10px 0px' }}
                   >
                       <Box component="img" src={ PlayStore} alt="AppGallery" width="30px" />
                   
                     <Box ml={2}>
-                      <Typography className="text-white" variant="body2">
+                      <Typography style={{fontSize:"10px"}} className="text-white" variant="body2">
                         Get it on
                       </Typography>
-                      <Typography className="text-white font-weight-bold">
+                      <Typography style={{fontSize:"15px"}} className="text-white font-weight-bold">
                         Google Play
                       </Typography>
                     </Box>
@@ -95,14 +95,14 @@ const OnlineOrder = () => {
                     variant="contained"
                     color="primary"
                     className="d-flex align-items-center rounded-3 w-100 "
-                    style={{ backgroundColor: 'black', padding: '15px 3px' }}
+                    style={{ backgroundColor: 'black', padding: '10px 0px' }}
                   >
                     <Box component="img" src={AppGallery} alt="AppGallery" width="30px" />
                     <Box ml={2}>
-                      <Typography className="text-white" variant="body1">
+                      <Typography style={{fontSize:"10px"}} className="text-white" variant="body1">
                         Explore it on
                       </Typography>
-                      <Typography className="text-white font-weight-bold">
+                      <Typography style={{fontSize:"15px"}} className="text-white font-weight-bold">
                         AppGallery
                       </Typography>
                     </Box>
@@ -122,7 +122,7 @@ const OnlineOrder = () => {
             className="position-relative"
           >
             <Box
-              className="position-absolute top-50 start-50 translate-middle pt-5 mt-5"
+              className="position-absolute top-50 start-50 translate-middle mt-5 "
               component="img"
               src={Mobile}
               alt="Mobile App"

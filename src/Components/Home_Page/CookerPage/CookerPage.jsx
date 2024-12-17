@@ -26,9 +26,9 @@ const CookerPage = () => {
 
           {/* Card Section */}
 
-          <Grid item xs={12} sm={8} md={6}sx={{ position: 'absolute', top: { xs: '52%', sm: '62%', md: '65%' }, left: { xs: '3%', sm: '10%', md: '15%' },display: 'flex', alignItems: 'center', }} >
+          <Grid item xs={12} sm={8} md={6}sx={{ position: 'absolute', top: { xs: '52%', sm: '62%', md: '69%' }, left: { xs: '3%', sm: '10%', md: '15%' },display: 'flex', alignItems: 'center', }} >
 
-            <Card sx={{  mt: 3, p: 2, borderRadius: 2, width: { xs: '95%', sm: '80%', md: '70%' }, }}>
+            <Card sx={{  mt: 1, p: 1, borderRadius: 2, width: { xs: '95%', sm: '80%', md: '70%' }, }}>
 
               <CardContent>
 
@@ -36,7 +36,7 @@ const CookerPage = () => {
                   List your restaurant or shop on foodpanda
                 </Typography>
 
-                <Typography variant="body1" sx={{ py: 3,fontSize: { xs: '14px', sm: '16px' }, }}>
+                <Typography variant="body1" sx={{ py: 2,fontSize: { xs: '14px', sm: '16px' }, }}>
 
                   Would you like millions of new customers to enjoy your amazing food and
                   groceries? So would we!
@@ -51,7 +51,7 @@ const CookerPage = () => {
                 </Typography>
                 <Typography
 
-                  sx={{ py: 3, fontSize: { xs: '13px', sm: '14px', md: '16px' }, }} variant="body2" >
+                  sx={{ py: 2, fontSize: { xs: '13px', sm: '14px', md: '16px' }, }} variant="body2" >
                   Interested? Let's start our partnership today!
 
                 </Typography>
