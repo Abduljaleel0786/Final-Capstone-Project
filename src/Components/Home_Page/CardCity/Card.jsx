@@ -30,6 +30,7 @@ import Sheikhupura from "../../../Images/Sheikhupura.jpg";
 import Sialkot from "../../../Images/Sialkot.webp";
 import Sukkur from "../../../Images/Sukkur.webp";
 import WahCantt from "../../../Images/WahhCannt.webp";
+import { Link } from 'react-router-dom';
 
 const cities = [
     { id: 1, name: 'Islamabad', image: Islamabad },
@@ -74,7 +75,7 @@ const Card = () => {
                     <Grid item xs={6} sm={6} md={4} lg={3} key={city.id}>
                         <Box
                             sx={{
-                                height: { xs: 180, sm: 300, md: 300 }, 
+                                height: { xs: 180, sm: 300, md: 300 },
                                 display: 'flex',
                                 flexDirection: 'column',
                                 justifyContent: 'flex-end',
@@ -96,23 +97,25 @@ const Card = () => {
                                     left: 0,
                                 }}
                             />
-                            <Button
-                                variant="contained"
-                                sx={{
-                                    position: 'absolute',
-                                    bottom: '1%', 
-                                    left: '1%', 
-                                    backgroundColor: 'rgba(255, 255, 255, 0.9)',
-                                    color: '#000',
-                                    fontWeight: 'bold',
-                                    borderRadius: '8px',
-                                    padding: '9px 18px', 
-                                    margin: '5px',
-                                    fontSize: '0.9rem',
-                                }}
-                            >
-                                {city.name}
-                            </Button>
+                            <Link to="/Resturant"  style={{ textDecoration: 'none' }}>
+                                <Button
+                                    variant="contained"
+                                    sx={{
+                                        position: 'absolute',
+                                        bottom: '1%',
+                                        left: '1%',
+                                        backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                                        color: '#000',
+                                        fontWeight: 'bold',
+                                        borderRadius: '8px',
+                                        padding: '9px 18px',
+                                        margin: '5px',
+                                        fontSize: '0.9rem',
+                                    }}
+                                >
+                                    {city.name}
+                                </Button>
+                            </Link>
                         </Box>
                     </Grid>
                 ))}

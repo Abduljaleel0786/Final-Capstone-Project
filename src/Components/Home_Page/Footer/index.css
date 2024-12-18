@@ -1,0 +1,25 @@
+.custum {
+    color: black;
+    text-decoration: none;
+    border-bottom: 1px solid black;
+    position: relative;
+  padding: 5px 0px;
+    cursor: pointer;
+   
+   
+  }
+ 
+  .custum:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background-color: black;
+    transition: width 0.4s ease-in-out;
+  }
+ 
+  .custum:hover:before {
+    width: 100%;
+  } 

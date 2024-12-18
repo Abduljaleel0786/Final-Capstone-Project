@@ -65,7 +65,7 @@ const AboutPage = () => {
         </Box>
     
     <Box sx={{  fontFamily: "Arial, sans-serif" }}>
-    <Typography variant="h6" gutterBottom>
+    <Typography className=" fw-bold py-3" variant="h6" gutterBottom>
       Which takeout restaurants open now near me?
     </Typography>
     <Typography variant="body1" paragraph>
@@ -74,7 +74,7 @@ const AboutPage = () => {
       restaurants and shops that deliver to your area.
     </Typography>
     
-    <Typography variant="h6" gutterBottom>
+    <Typography className=" fw-bold py-2" variant="h6" gutterBottom>
       Does foodpanda deliver 24 hours?
     </Typography>
     <Typography variant="body1" paragraph>
@@ -83,14 +83,14 @@ const AboutPage = () => {
       hours by using your address. You can also order groceries 24 hours a day via pandamart.
     </Typography>
     
-    <Typography variant="h6" gutterBottom>
+    <Typography className=" fw-bold py-2" variant="h6" gutterBottom>
       Can you pay cash for foodpanda?
     </Typography>
     <Typography variant="body1" >
       Yes, you can pay cash on delivery for foodpanda in Pakistan.
     </Typography>
     
-    <Typography variant="h6" gutterBottom>
+    <Typography  className=" fw-bold py-2" variant="h6" gutterBottom>
       How can I pay foodpanda online?
     </Typography>
     <Typography variant="body1" >
@@ -98,7 +98,7 @@ const AboutPage = () => {
       PayPal.
     </Typography>
     
-    <Typography variant="h6" >
+    <Typography className=" fw-bold py-2" variant="h6" >
       Can I order foodpanda for someone else?
     </Typography>
     <Typography variant="body1" >
@@ -109,7 +109,7 @@ const AboutPage = () => {
     </Typography>
     </Box>
     <Box sx={{  fontFamily: "Arial, sans-serif" }}>
-          <Typography variant="h6" >
+          <Typography className=" fw-bold py-2" variant="h6" >
             How much does foodpanda charge for delivery?
           </Typography>
           <Typography variant="body1" >
@@ -119,7 +119,7 @@ const AboutPage = () => {
             "Free Delivery" icon at the top of your restaurant listing.
           </Typography>
     
-          <Typography variant="h6" >
+          <Typography className=" fw-bold py-2" variant="h6" >
             What restaurants let you order online?
           </Typography>
           <Typography variant="body1" >
@@ -156,7 +156,7 @@ const AboutPage = () => {
             in your address and discover all the available places.
           </Typography>
     
-          <Typography variant="h6" gutterBottom>
+          <Typography className=" fw-bold py-2" variant="h6" gutterBottom>
             Does foodpanda have a minimum order?
           </Typography>
           <Typography variant="body1" paragraph>
@@ -164,7 +164,7 @@ const AboutPage = () => {
             restaurant you order from and is indicated during your ordering process.
           </Typography>
     
-          <Typography variant="h6" gutterBottom>
+          <Typography className=" fw-bold py-2" variant="h6" gutterBottom>
             What is the difference between delivery and Pick-Up?
           </Typography>
           <Typography variant="body1" paragraph>
@@ -174,7 +174,7 @@ const AboutPage = () => {
             Pick-Up orders are available for restaurants only.
           </Typography>
     
-          <Typography variant="h6" sx={{ marginTop: 2 }}>
+          <Typography className=" fw-bold py-2" variant="h6" sx={{ marginTop: 2 }}>
             Order food and groceries online with foodpanda now and enjoy a great dining experience!
           </Typography>
         </Box>

@@ -12,7 +12,7 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { Icon } from '@iconify/react';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
-import Headerimg from '../../../Images/headericon.jpeg';
+import Headerimg from '../../../Images/headericon.png';
 import Logo from '../../../Images/Logo.jpeg';
 
 function Navbar() {
@@ -26,18 +26,19 @@ function Navbar() {
     return (
         <>
             {/* Top Bar */}
-            <AppBar position="static" sx={{ backgroundColor: '#c21760' }}>
+
+            <AppBar className="d-none d-lg-block" position="static" sx={{ backgroundColor: '#c21760' }}>
                 <Box className="container">
                     <Grid container alignItems="center" justifyContent="center" sx={{ height: 64, px: 2 }}>
                         <Grid item>
                             <img style={{ width: '40px' }} src={Headerimg} alt="Header Icon" />
                         </Grid>
-                        <Grid item xs>
+                        <Grid item>
                             <Typography
                                 variant="h6"
                                 component="div"
                                 align="center"
-                                sx={{ color: '#fff', fontWeight: 'bold', fontSize: isMobile ? '14px' : '18px' }}
+                                sx={{ color: '#fff', fontWeight: 'bold', marginLeft: '8px', marginRight: '8px' }}
                             >
                                 Do you need a business account?
                             </Typography>
@@ -47,8 +48,7 @@ function Navbar() {
                                 sx={{
                                     backgroundColor: '#e21b70',
                                     color: '#fff',
-                                    fontSize: isMobile ? '12px' : '14px',
-                                    padding: isMobile ? '6px 12px' : '8px 16px',
+                                    marginLeft: '8px',
                                     '&:hover': {
                                         backgroundColor: '#c2185b',
                                     },
@@ -63,9 +63,7 @@ function Navbar() {
             </AppBar>
 
             {/* Main Navbar */}
-            <AppBar
-                position="static"
-                sx={{ backgroundColor: '#fff', boxShadow: 'none', borderBottom: '1px solid #e0e0e0' }}
+            <AppBar position="static" sx={{ backgroundColor: '#fff', boxShadow: 'none', borderBottom: '1px solid #e0e0e0' }}
             >
                 <Box className="container">
                     <Grid container alignItems="center" justifyContent="space-between" sx={{ height: 64 }}>
@@ -93,9 +91,9 @@ function Navbar() {
                                             color: '#000',
                                             fontSize: isMobile ? '12px' : '14px',
                                             borderRadius: '8px',
-                                            border:"1px solid Black",
-                                           margin:'0px 8px',
-                                           padding:'5px 12px',
+                                            border: "1px solid Black",
+                                            margin: '0px 8px',
+                                            padding: '5px 12px',
                                         }}
                                     >
                                         Log In
@@ -109,7 +107,7 @@ function Navbar() {
                                             color: '#fff',
                                             fontSize: isMobile ? '12px' : '14px',
                                             borderRadius: '8px',
-                                            padding:'5px 12px',
+                                            padding: '5px 12px',
                                         }}
                                     >
                                         Sign Up
@@ -148,12 +146,12 @@ function Navbar() {
                                                 textAlign: 'center',
                                             }}
                                         >
-                                           <Box style={{backgroundColor:'#f7f7f7'}} className='d-flex justify-content-between py-3 px-3 rounded-3'> 
-                                           <Typography variant="body2" sx={{ mb: 1 }}>
-                                                English
-                                            </Typography>
-                                            <CheckCircleOutlineIcon  sx={{ color: '#e21b70' }} />
-                                           </Box>
+                                            <Box style={{ backgroundColor: '#f7f7f7' }} className='d-flex justify-content-between py-3 px-3 rounded-3'>
+                                                <Typography variant="body2" sx={{ mb: 1 }}>
+                                                    English
+                                                </Typography>
+                                                <CheckCircleOutlineIcon sx={{ color: '#e21b70' }} />
+                                            </Box>
                                         </Box>
                                     </Modal>
                                 </Grid>

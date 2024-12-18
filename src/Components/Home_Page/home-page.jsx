@@ -12,11 +12,11 @@ const Homepage = () => {
   return (
     <>
       <Navbar />
-       <HeroSection />
+      <HeroSection />
       <CookerPage />
       <Card />
       <OnlineOrder />
-      <LunchPage /> 
+      <LunchPage />
       <AboutPage />
       <Footer />
 
