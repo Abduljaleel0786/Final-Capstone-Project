@@ -14,6 +14,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import Headerimg from '../../../Images/headericon.png';
 import Logo from '../../../Images/Logo.jpeg';
+import { Link, Outlet } from 'react-router-dom';
 
 function Navbar() {
     const [open, setOpen] = React.useState(false);
@@ -67,9 +68,10 @@ function Navbar() {
             >
                 <Box className="container">
                     <Grid container alignItems="center" justifyContent="space-between" sx={{ height: 64 }}>
+                         <Link to="/"  style={{ textDecoration: 'none' }}>
                         <Grid item display="flex" alignItems="center">
                             <img style={{ width: isMobile ? '30px' : '35px' }} src={Logo} alt="Logo" />
-                            <Typography
+                            <Typography 
                                 variant="h6"
                                 sx={{
                                     color: '#e21b70',
@@ -77,10 +79,11 @@ function Navbar() {
                                     fontWeight: 'bold',
                                     fontSize: isMobile ? '16px' : '20px',
                                 }}
-                            >
+                             >
                                 foodpanda
                             </Typography>
                         </Grid>
+                        </Link>
 
                         <Grid item>
                             <Grid container spacing={isMobile ? 1 : 2} alignItems="center">
@@ -174,6 +177,7 @@ function Navbar() {
                     </Grid>
                 </Box>
             </AppBar>
+            <Outlet/>
         </>
     );
 }

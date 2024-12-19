@@ -1,5 +1,4 @@
 import React from 'react'
-import Navbar from './Navbar/navbar'
 import Footer from './Footer/Footer'
 import Card from './CardCity/Card'
 import HeroSection from './HeroSection/HeroSection'
@@ -11,7 +10,7 @@ import AboutPage from './AboutPage/AboutPage'
 const Homepage = () => {
   return (
     <>
-      <Navbar />
+
       <HeroSection />
       <CookerPage />
       <Card />
@@ -19,8 +18,6 @@ const Homepage = () => {
       <LunchPage />
       <AboutPage />
       <Footer />
-
-
 
     </>
   )
