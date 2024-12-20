@@ -15,6 +15,7 @@ import { useTheme } from '@mui/material/styles';
 import Headerimg from '../../../Images/headericon.png';
 import Logo from '../../../Images/Logo.jpeg';
 import { Link, Outlet } from 'react-router-dom';
+import SignUp from '../../SignUpPage/SignUp';
 
 function Navbar() {
     const [open, setOpen] = React.useState(false);
@@ -23,6 +24,13 @@ function Navbar() {
 
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    function BasicModal(props) {
+        [open, setOpen] = props
+        const [open, setOpen] = React.useState(false);
+        const handleOpen = () => setOpen(true);
+        const handleClose = () => setOpen(false);
+
+    }
 
     return (
         <>
@@ -53,11 +61,10 @@ function Navbar() {
                                     '&:hover': {
                                         backgroundColor: '#c2185b',
                                     },
-                                }}
-                                variant="contained"
-                            >
+                                }} variant="contained" onClick={<SignUp />}>
                                 SIGN UP NOW
                             </Button>
+                            <SignUp />
                         </Grid>
                     </Grid>
                 </Box>
@@ -68,21 +75,21 @@ function Navbar() {
             >
                 <Box className="container">
                     <Grid container alignItems="center" justifyContent="space-between" sx={{ height: 64 }}>
-                         <Link to="/"  style={{ textDecoration: 'none' }}>
-                        <Grid item display="flex" alignItems="center">
-                            <img style={{ width: isMobile ? '30px' : '35px' }} src={Logo} alt="Logo" />
-                            <Typography 
-                                variant="h6"
-                                sx={{
-                                    color: '#e21b70',
-                                    ml: 1,
-                                    fontWeight: 'bold',
-                                    fontSize: isMobile ? '16px' : '20px',
-                                }}
-                             >
-                                foodpanda
-                            </Typography>
-                        </Grid>
+                        <Link to="/" style={{ textDecoration: 'none' }}>
+                            <Grid item display="flex" alignItems="center">
+                                <img style={{ width: isMobile ? '30px' : '35px' }} src={Logo} alt="Logo" />
+                                <Typography
+                                    variant="h6"
+                                    sx={{
+                                        color: '#e21b70',
+                                        ml: 1,
+                                        fontWeight: 'bold',
+                                        fontSize: isMobile ? '16px' : '20px',
+                                    }}
+                                >
+                                    foodpanda
+                                </Typography>
+                            </Grid>
                         </Link>
 
                         <Grid item>
@@ -112,7 +119,8 @@ function Navbar() {
                                             borderRadius: '8px',
                                             padding: '5px 12px',
                                         }}
-                                    >
+                                       onClick={ open={open} }
+                                       >
                                         Sign Up
                                     </Button>
                                 </Grid>
@@ -177,7 +185,7 @@ function Navbar() {
                     </Grid>
                 </Box>
             </AppBar>
-            <Outlet/>
+            <Outlet />
         </>
     );
 }

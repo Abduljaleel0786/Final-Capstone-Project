@@ -1,23 +1,51 @@
 import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
 import heroImage from "../../Images/hero-img.webp";
-import { Box, Typography, Container, Grid, Card, CardMedia, CardContent, Divider, Tooltip, } from "@mui/material";
+import {
+    Box,
+    Typography,
+    Container,
+    Grid,
+    Card,
+    CardMedia,
+    CardContent,
+    Divider,
+    Tooltip,
+    CircularProgress,
+} from "@mui/material";
 import { useEffect, useState } from "react";
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import InfoIcon from '@mui/icons-material/Info';
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import InfoIcon from "@mui/icons-material/Info";
+import { useNavigate } from "react-router-dom";
+
 const Restaurant = () => {
     const [products, setProducts] = useState([]);
+    const [isLoading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+    const navigate=useNavigate();
 
     useEffect(() => {
         const fetchProducts = async () => {
+            setLoading(true);
+            setError(null); // Reset error before the API call
             try {
-                const response = await axios.get("https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood");
-                setProducts(response.data.meals);
-            } catch (error) {
-                console.error("Error fetching products:", error);
+                const response = await axios.get(
+                    "https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood"
+                );
+                if (response.data.meals) {
+                    setProducts(response.data.meals);
+                    setLoading(false);
+                } else {
+                    setError("No products found.");
+                    setLoading(false);
+                }
+            } catch (err) {
+                setError("Error fetching products.");
+                setLoading(false);
             }
         };
+
         fetchProducts();
     }, []);
 
@@ -34,7 +62,6 @@ const Restaurant = () => {
                     minHeight: "300px",
                     position: "relative",
                     flexDirection: "column",
-
                 }}
             >
                 {/* Background Image */}
@@ -52,7 +79,6 @@ const Restaurant = () => {
                         zIndex: 0,
                     }}
                 />
-
                 {/* Text Section */}
                 <Container
                     sx={{
@@ -87,57 +113,56 @@ const Restaurant = () => {
                 >
                     Restaurants
                 </Typography>
+                {isLoading ? (
+                    <Box className="text-center mt-5">
+                        <CircularProgress color="inherit" />
+                    </Box>
+                ) : error ? (
+                    <Typography color="error" align="center">
+                        {error}
+                    </Typography>
+                ) : (
+                    <Grid container spacing={4}>
+                        {products.map((product) => (
+                            <Grid item xs={12} sm={6} md={4} key={product.idMeal}>
+                                <Card>
+                                    <CardMedia
+                                        component="img"
+                                        height="140"
+                                        image={product.strMealThumb}
+                                        alt={product.strMeal}
+                                    />
 
-                <Grid container spacing={4}>
-                    {products.map((product) => (
-                        <Grid item xs={12} sm={6} md={4} key={product.idMeal}>
-                            <Card>
-                                <CardMedia
-                                    component="img"
-                                    height="140"
-                                    image={product.strMealThumb}
-                                    alt={product.strMeal}
-                                />
-                                <CardContent>
-                                    <Typography variant="h6" component="div">
-                                        {product.strMeal}
-                                    </Typography>
+                                    <CardContent>
 
-                                </CardContent>
-                                <Divider className="mt-2 mb-2 " />
+                                        <Tooltip title={product.strMeal} placement="top">
+                                     
+                                        <Typography variant="h6" component="div">
+                                            {product.strMeal.length > 10
+                                                ? `${product.strMeal.slice(0, 10)}...`
+                                                : product.strMeal}
+                                        </Typography>
+                                        </Tooltip>
 
-                                <Box  className=' d-flex justify-content-between p-3'>
+                                    </CardContent>
 
-
-                                    <Tooltip title="Details" placement="top">
-
-                                    <InfoIcon />
-
-                                    </Tooltip>
-
-                                    <Tooltip title="Favourate" placement="top">
-
-                                    <FavoriteBorderIcon />
-
-                                    </Tooltip>
-
-                                    <Tooltip title="Add to cart" placement="top">
-
-                                    <AddShoppingCartIcon />
-
-                                    </Tooltip>
-                                  
-                                  
-                                   
-                                </Box>
-
-
-
-                            </Card>
-                        </Grid>
-                    ))}
-                </Grid>
-                
+                                    <Divider className="mt-2 mb-2" />
+                                    <Box className="d-flex justify-content-between p-3">
+                                        <Tooltip title="Details" placement="top">
+                                            <InfoIcon onClick={()=>{navigate=('')}}  />
+                                        </Tooltip>
+                                        <Tooltip title="Favorite" placement="top">
+                                            <FavoriteBorderIcon />
+                                        </Tooltip>
+                                        <Tooltip title="Add to cart" placement="top">
+                                            <AddShoppingCartIcon />
+                                        </Tooltip>
+                                    </Box>
+                                </Card>
+                            </Grid>
+                        ))}
+                    </Grid>
+                )}
             </Container>
         </Box>
     );

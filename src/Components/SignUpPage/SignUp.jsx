@@ -1,8 +1,9 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import TextField from '@mui/material/TextField';
 
 const style = {
     position: 'absolute',
@@ -16,39 +17,57 @@ const style = {
     p: 4,
 };
 
- function BasicModal() {
-    const [open, setOpen] = React.useState(false);
+const SignUp = () => {
+    const [open, setOpen] = useState(false);
+
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
- }
-    const SignUp = () => {
-        return (
-
-
-
-
-            <div>
-                <Button onClick={handleOpen}>Open modal</Button>
-                <Modal
-                    open={open}
-                    onClose={handleClose}
-                    aria-labelledby="modal-modal-title"
-                    aria-describedby="modal-modal-description"
-                >
-                    <Box sx={style}>
-                        <Typography id="modal-modal-title" variant="h6" component="h2">
-                            Text in a modal
-                        </Typography>
-                        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-                        </Typography>
+    return (
+        <div>
+            <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <Box sx={style}>
+                    <Typography id="modal-modal-title" variant="h6" component="h2">
+                        Sign Up
+                    </Typography>
+                    <Box
+                        component="form"
+                        sx={{ display: 'flex', flexDirection: 'column', gap: 2, mt: 2 }}
+                    >
+                        <TextField
+                            label="Name"
+                            variant="outlined"
+                            fullWidth
+                        />
+                        <TextField
+                            label="Email"
+                            variant="outlined"
+                            type="email"
+                            fullWidth
+                        />
+                        <TextField
+                            label="Password"
+                            variant="outlined"
+                            type="password"
+                            fullWidth
+                        />
+                        <Button
+                            variant="contained"
+                            color="success"
+                            onClick={handleClose}
+                        >
+                            Submit
+                        </Button>
                     </Box>
-                </Modal>
-            </div>
+                </Box>
+            </Modal>
+        </div>
+    );
+};
 
-
-        )
-    }
-
-    export default SignUp
+export default SignUp;
