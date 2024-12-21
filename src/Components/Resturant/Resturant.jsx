@@ -18,12 +18,15 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import InfoIcon from "@mui/icons-material/Info";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../Slices/addCartSlice";
 
 const Restaurant = () => {
     const [products, setProducts] = useState([]);
     const [isLoading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const navigate=useNavigate();
+    const dispatch = useDispatch()
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -155,7 +158,7 @@ const Restaurant = () => {
                                             <FavoriteBorderIcon />
                                         </Tooltip>
                                         <Tooltip title="Add to cart" placement="top">
-                                            <AddShoppingCartIcon />
+                                            <AddShoppingCartIcon onClick={()=>dispatch(addToCart())} />
                                         </Tooltip>
                                     </Box>
                                 </Card>

@@ -17,12 +17,7 @@ const style = {
     p: 4,
 };
 
-const SignUp = () => {
-    const [open, setOpen] = useState(false);
-
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
-
+const  SignUp = ({ open,handleClose}) => {
     return (
         <div>
             <Modal
