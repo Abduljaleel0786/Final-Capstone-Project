@@ -7,6 +7,9 @@ import { Provider } from "react-redux";
 import { store } from "./Store/Store";
 import Resturant from "./Components/Resturant/Resturant";
 import ErrorPage from "./Components/ErrorPage/ErrorPage";
+import "react-toastify/dist/ReactToastify.css";
+
+  
 
 function App() {
   const router = createBrowserRouter([
