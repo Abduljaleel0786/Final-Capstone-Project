@@ -1,37 +1,40 @@
 import { Box, Grid, Typography, Button } from '@mui/material';
-import React from 'react';
-import Islamabad from "../../../Images/Islamabad.webp";
-import Karachi from "../../../Images/Karachi.webp";
-import Lahore from "../../../Images/Lahore.webp";
-import Faisalabad from "../../../Images/Faisalabad.webp";
-import Rawalpindi from "../../../Images/Rawalpindi.webp";
-import Abbottabad from "../../../Images/Abottabad.webp";
-import Bahawalpur from "../../../Images/Bahawalpur.webp";
-import DeraGhaziKhan from "../../../Images/GhaziKhan.webp";
-import Gujranwala from "../../../Images/Gujranwala.webp";
-import Gujrat from "../../../Images/Gujrat.jpg";
-import Hyderabad from "../../../Images/Hyderabad.webp";
-import Jhelum from "../../../Images/Jhelum.webp";
-import Kamoke from "../../../Images/Kamoke.webp";
-import Larkana from "../../../Images/Larkana.webp";
-import Mangla from "../../../Images/Mangla.webp";
-import Mardan from "../../../Images/Mardan.webp";
-import Multan from "../../../Images/Multan.webp";
-import Murree from "../../../Images/Murree.webp";
-import Okara from "../../../Images/Okara.webp";
-import PanoAqil from "../../../Images/PanoAqil.webp";
-import Peshawar from "../../../Images/Mardan.webp";
-import Quetta from "../../../Images/Quetta.webp";
-import RahimYarKhan from "../../../Images/RahimYarKhan.webp";
-import Sadiqabad from "../../../Images/Sadiqabad.webp";
-import Sahiwal from "../../../Images/Sahiwal.webp";
-import Sargodha from "../../../Images/Sargodha.webp";
-import Sheikhupura from "../../../Images/Sheikhupura.jpg";
-import Sialkot from "../../../Images/Sialkot.webp";
-import Sukkur from "../../../Images/Sukkur.webp";
-import WahCantt from "../../../Images/WahhCannt.webp";
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+// Import city images
+import Islamabad from '../../../Images/Islamabad.webp';
+import Karachi from '../../../Images/Karachi.webp';
+import Lahore from '../../../Images/Lahore.webp';
+import Faisalabad from '../../../Images/Faisalabad.webp';
+import Rawalpindi from '../../../Images/Rawalpindi.webp';
+import Abbottabad from '../../../Images/Abottabad.webp';
+import Bahawalpur from '../../../Images/Bahawalpur.webp';
+import DeraGhaziKhan from '../../../Images/GhaziKhan.webp';
+import Gujranwala from '../../../Images/Gujranwala.webp';
+import Gujrat from '../../../Images/Gujrat.jpg';
+import Hyderabad from '../../../Images/Hyderabad.webp';
+import Jhelum from '../../../Images/Jhelum.webp';
+import Kamoke from '../../../Images/Kamoke.webp';
+import Larkana from '../../../Images/Larkana.webp';
+import Mangla from '../../../Images/Mangla.webp';
+import Mardan from '../../../Images/Mardan.webp';
+import Multan from '../../../Images/Multan.webp';
+import Murree from '../../../Images/Murree.webp';
+import Okara from '../../../Images/Okara.webp';
+import PanoAqil from '../../../Images/PanoAqil.webp';
+import Peshawar from '../../../Images/Mardan.webp';
+import Quetta from '../../../Images/Quetta.webp';
+import RahimYarKhan from '../../../Images/RahimYarKhan.webp';
+import Sadiqabad from '../../../Images/Sadiqabad.webp';
+import Sahiwal from '../../../Images/Sahiwal.webp';
+import Sargodha from '../../../Images/Sargodha.webp';
+import Sheikhupura from '../../../Images/Sheikhupura.jpg';
+import Sialkot from '../../../Images/Sialkot.webp';
+import Sukkur from '../../../Images/Sukkur.webp';
+import WahCantt from '../../../Images/WahhCannt.webp';
+
+// City data array
 const cities = [
     { id: 1, name: 'Islamabad', image: Islamabad },
     { id: 2, name: 'Karachi', image: Karachi },
@@ -64,7 +67,10 @@ const cities = [
     { id: 29, name: 'Sukkur', image: Sukkur },
     { id: 30, name: 'WahCantt', image: WahCantt },
 ];
+
 const Card = () => {
+    const [selectedCity, setSelectedCity] = useState('');
+
     return (
         <div className="container py-5">
             <Typography variant="h4" align="start" gutterBottom>
@@ -73,31 +79,32 @@ const Card = () => {
             <Grid container spacing={2}>
                 {cities.map((city) => (
                     <Grid item xs={6} sm={6} md={4} lg={3} key={city.id}>
-                        <Box
-                            sx={{
-                                height: { xs: 180, sm: 300, md: 300 },
-                                display: 'flex',
-                                flexDirection: 'column',
-                                justifyContent: 'flex-end',
-                                borderRadius: '8px',
-                                overflow: 'hidden',
-                                boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-                                position: 'relative',
-                            }}
-                        >
-                            <img
-                                src={city.image}
-                                alt={city.name}
-                                style={{
-                                    width: '100%',
-                                    height: '100%',
-                                    objectFit: 'cover',
-                                    position: 'absolute',
-                                    top: 0,
-                                    left: 0,
+                        <Link to="/Resturant" style={{ textDecoration: 'none' }}>
+                            <Box
+                                sx={{
+                                    height: 180,
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    justifyContent: 'flex-end',
+                                    borderRadius: '8px',
+                                    overflow: 'hidden',
+                                    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                                    position: 'relative',
                                 }}
-                            />
-                            <Link to="/Resturant"  style={{ textDecoration: 'none' }}>
+                            >
+                                <img
+                                    src={city.image}
+                                    alt={city.name}
+                                    style={{
+                                        width: '100%',
+                                        height: '100%',
+                                        objectFit: 'cover',
+                                        position: 'absolute',
+                                        top: 0,
+                                        left: 0,
+                                    }}
+                                />
+
                                 <Button
                                     variant="contained"
                                     sx={{
@@ -112,11 +119,13 @@ const Card = () => {
                                         margin: '5px',
                                         fontSize: '0.9rem',
                                     }}
+                                    onClick={() => setSelectedCity(city.name)}
                                 >
                                     {city.name}
                                 </Button>
-                            </Link>
-                        </Box>
+
+                            </Box>
+                        </Link>
                     </Grid>
                 ))}
             </Grid>
@@ -125,4 +134,9 @@ const Card = () => {
 };
 
 export default Card;
+
+
+
+
+
 

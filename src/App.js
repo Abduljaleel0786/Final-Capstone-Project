@@ -8,19 +8,24 @@ import { store } from "./Store/Store";
 import Resturant from "./Components/Resturant/Resturant";
 import ErrorPage from "./Components/ErrorPage/ErrorPage";
 import "react-toastify/dist/ReactToastify.css";
+import ProductDetails from "./Components/Resturant/ProductDetails/ProductDetails";
 
-  
+
 
 function App() {
   const router = createBrowserRouter([
     {
       path: "/",
       element: < Navbar />,
-      errorElement: <ErrorPage />, 
+      errorElement: <ErrorPage />,
       children: [
         {
-          path: "",
+          path: "/",
           element: <Homepage />,
+        },
+        {
+          path: "ProductDetails/:product_id",
+          element: <ProductDetails />,
         },
         {
           path: "/Resturant",

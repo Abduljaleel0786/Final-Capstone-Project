@@ -11,9 +11,11 @@ export const productSlice = createSlice({
   initialState,
   reducers: {
     addProduct: (state, action) => {
-      console.log(state, action, 'ggg');
-      const isExit = state.items.find((item) => item.id === action.payload.id);
-      console.log(isExit);
+      console.log( action, 'ggg');
+      const isExit = state.items.find((item) => item.
+      idMeal
+       === action.payload.idMeal  );
+     
 
       if (isExit) {
         state.isToast = true;
@@ -23,7 +25,11 @@ export const productSlice = createSlice({
     },
 
     increaseQuantity: (state, action) => {
-      const product = state.items.find((item) => item.id === action.payload.id);
+      const product = state.items.find((item) => item.
+      idMeal
+       === action.payload.
+      idMeal
+      );
       if (product) {
         product.quantity += 1;
       }
@@ -31,12 +37,20 @@ export const productSlice = createSlice({
     },
 
     decreaseQuantity: (state, action) => {
-      const product = state.items.find((item) => item.id === action.payload.id);
+      const product = state.items.find((item) => item.
+      idMeal
+       === action.payload.
+      idMeal
+      );
       if (product && product.quantity > 1) {
         product.quantity -= 1;
       } else {
 
-        state.items = state.items.filter((item) => item.id !== action.payload.id)
+        state.items = state.items.filter((item) => item.
+        idMeal
+         !== action.payload.
+        idMeal
+        )
       }
 
     },

@@ -1,72 +1,125 @@
 import React from 'react';
-import { Modal, Box, Typography, Button, TextField } from '@mui/material';
+import { Modal, Box, Typography, TextField, Button } from '@mui/material';
 import { useForm } from 'react-hook-form';
 
 const SignUpModal = ({ open, handleClose }) => {
-   
     const { register, handleSubmit, formState: { errors } } = useForm();
 
-    
     const onSubmit = (data) => {
-        console.log(data); 
+        // Save user data to localStorage on sign-up
+        localStorage.setItem('user', JSON.stringify(data));
         handleClose(); 
     };
 
     return (
-        <Modal open={open} onClose={handleClose}>
-            <Box sx={{
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                bgcolor: 'background.paper',
-                padding: 4,
-                boxShadow: 24,
-                borderRadius: 2,
-                width: "20%"
-            }}>
-                <Typography variant="h6" mb={2} align="center">Welcome!</Typography>
-                <Typography variant="subtitle1" mb={3} align="center">
-                    
+        <Modal
+            open={open}
+            onClose={handleClose}
+            sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+            }}
+        >
+            <Box
+                sx={{
+                    width: '100%',
+                    maxWidth: '400px',
+                    backgroundColor: 'white',
+                    borderRadius: '8px',
+                    padding: 3,
+                    boxShadow: 3,
+                }}
+            >
+                <Typography
+                    variant="h6"
+                    align="center"
+                    sx={{
+                        color: '#e21b70',
+                        fontWeight: 'bold',
+                        marginBottom: 2,
+                    }}
+                >
+                    Welcome! Sign up to get started.
                 </Typography>
-
-                {/* Form */}
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <TextField
                         fullWidth
                         label="Name"
+                        variant="outlined"
+                        margin="normal"
                         {...register('name', { required: 'Name is required' })}
                         error={!!errors.name}
                         helperText={errors.name?.message}
-                        margin="normal"
+                        sx={{
+                            marginBottom: 2,
+                        }}
                     />
                     <TextField
                         fullWidth
                         label="Email"
+                        variant="outlined"
+                        margin="normal"
                         {...register('email', { required: 'Email is required' })}
                         error={!!errors.email}
                         helperText={errors.email?.message}
-                        margin="normal"
+                        sx={{
+                            marginBottom: 2,
+                        }}
                     />
                     <TextField
                         fullWidth
                         type="password"
                         label="Password"
+                        variant="outlined"
+                        margin="normal"
                         {...register('password', { required: 'Password is required' })}
                         error={!!errors.password}
                         helperText={errors.password?.message}
-                        margin="normal"
+                        sx={{
+                            marginBottom: 2,
+                        }}
                     />
                     <Button
                         type="submit"
                         fullWidth
                         variant="contained"
-                        sx={{ mt: 2, backgroundColor: '#e21b70' }}
+                        sx={{
+                            mt: 2,
+                            backgroundColor: '#e21b70',
+                            '&:hover': { backgroundColor: '#c2185b' },
+                            fontWeight: 'bold',
+                        }}
                     >
-                        Log In
+                        Sign Up
                     </Button>
-                    <Typography variant="body2" mb={2} mt={2} align="center" color="text.secondary">
-                        By signing up, you agree to our <span style={{ cursor: 'pointer', color: '#e21b70' }}>Terms and Conditions</span> and <span style={{ cursor: 'pointer', color: '#e21b70' }}>Privacy Policy</span>.
+                    <Typography
+                        variant="body2"
+                        align="center"
+                        color="text.secondary"
+                        sx={{
+                            marginTop: 2,
+                            fontSize: '14px',
+                        }}
+                    >
+                        By signing up, you agree to our{' '}
+                        <span
+                            style={{
+                                cursor: 'pointer',
+                                color: '#e21b70',
+                            }}
+                        >
+                            Terms and Conditions
+                        </span>{' '}
+                        and{' '}
+                        <span
+                            style={{
+                                cursor: 'pointer',
+                                color: '#e21b70',
+                            }}
+                        >
+                            Privacy Policy
+                        </span>.
                     </Typography>
                 </form>
             </Box>
