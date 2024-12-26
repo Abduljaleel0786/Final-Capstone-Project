@@ -34,27 +34,18 @@ function Navbar() {
     const [userName, setUserName] = useState('');
 
     useEffect(() => {
-        const user = JSON.parse(localStorage.getItem('user'));
-        if (user) {
-            setIsLoggedIn(true);
-            setUserName(user.name);
-        } else {
-            setIsLoggedIn(false);
-            setUserName('');
-        }
-
-        const handleStorageChange = (e) => {
-            if (e.key === 'user') {
-                const updatedUser = JSON.parse(e.newValue);
-                if (updatedUser) {
-                    setIsLoggedIn(true);
-                    setUserName(updatedUser.name);
-                } else {
-                    setIsLoggedIn(false);
-                    setUserName('');
-                }
+        const handleStorageChange = () => {
+            const user = JSON.parse(localStorage.getItem('user'));
+            if (user) {
+                setIsLoggedIn(true);
+                setUserName(user.name);
+            } else {
+                setIsLoggedIn(false);
+                setUserName('');
             }
         };
+
+        handleStorageChange();
 
         window.addEventListener('storage', handleStorageChange);
         return () => window.removeEventListener('storage', handleStorageChange);
@@ -62,14 +53,12 @@ function Navbar() {
 
     const handleLogout = () => {
         localStorage.removeItem('user');
-        setIsLoggedIn(false);
-        setUserName('');
+        window.dispatchEvent(new Event('storage')); // Trigger storage event
     };
 
     const handleLogin = (user) => {
         localStorage.setItem('user', JSON.stringify(user));
-        setIsLoggedIn(true);
-        setUserName(user.name);
+        window.dispatchEvent(new Event('storage')); // Trigger storage event
     };
 
     const theme = useTheme();
@@ -121,7 +110,10 @@ function Navbar() {
             </AppBar>
 
             {/* Main Navbar */}
-            <AppBar position="sticky" sx={{ backgroundColor: '#fff', boxShadow: 'none', borderBottom: '1px solid #e0e0e0' }}>
+            <AppBar
+                position="sticky"
+                sx={{ backgroundColor: '#fff', boxShadow: 'none', borderBottom: '1px solid #e0e0e0' }}
+            >
                 <Box className="container">
                     <Grid container alignItems="center" justifyContent="space-between" sx={{ height: 64 }}>
                         <Grid item>
@@ -164,6 +156,7 @@ function Navbar() {
                                     <>
                                         <Grid item>
                                             <Button className=' border border-dark' sx={{ backgroundColor: '#fff', color: '#000' }}
+
                                                 onClick={() => setOpenLogin(true)}>Log In</Button>
                                         </Grid>
                                         <Grid item>
@@ -193,6 +186,7 @@ function Navbar() {
                     </Grid>
                 </Box>
             </AppBar>
+
 
             <SignUpModal open={openSignUp} handleClose={() => setOpenSignUp(false)} handleLogin={handleLogin} />
             <LoginModal open={openLogin} handleClose={() => setOpenLogin(false)} handleLogin={handleLogin} />
