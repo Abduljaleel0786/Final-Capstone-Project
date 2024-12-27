@@ -15,6 +15,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { useDispatch, useSelector } from "react-redux";
 import { addProduct } from "../../../Slices/productSlice";
+import { addFavorite } from "../../../Slices/favouriteSlice";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -25,7 +26,8 @@ const Product = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { isToast } = useSelector((state) => state.products);
+  const { cartToastMessage } = useSelector((state) => state.products);
+  const { favoriteToastMessage } = useSelector((state) => state.favorite);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -51,17 +53,23 @@ const Product = () => {
   }, []);
 
   useEffect(() => {
-    if (isToast) {
-      toast("Product added!");
+    if (cartToastMessage) {
+      toast.success(cartToastMessage);
     }
-  }, [isToast]);
+  }, [cartToastMessage]);
+
+  useEffect(() => {
+    if (favoriteToastMessage) {
+      toast.success(favoriteToastMessage);
+    }
+  }, [favoriteToastMessage]);
 
   return (
-    <Box sx={{ padding: "20px", backgroundColor: "#fff", width: "100%" }}>
+    <Box sx={{ padding: { xs: "10px", sm: "20px" }, backgroundColor: "#fff", width: "100%" }}>
       <Typography
         variant="h4"
         component="h2"
-        sx={{ marginBottom: "20px", fontWeight: "bold" }}
+        sx={{ marginBottom: "20px", fontWeight: "bold", fontSize: { xs: "1.5rem", sm: "2rem" } }}
       >
         Popular <br />
         Most ordered right now.
@@ -70,7 +78,7 @@ const Product = () => {
       <ToastContainer />
 
       {isLoading ? (
-        <Box className="text-center mt-5">
+        <Box sx={{ display: "flex", justifyContent: "center", mt: 5 }}>
           <CircularProgress color="inherit" />
         </Box>
       ) : error ? (
@@ -78,45 +86,51 @@ const Product = () => {
           {error}
         </Typography>
       ) : (
-        <Grid container spacing={4}>
+        <Grid container spacing={2}>
           {products.map((product) => (
-            <Grid item xs={12} sm={6} md={6} key={product.idMeal}>
-              <Card>
-                <Box className="d-flex align-items-center p-2">
+            <Grid item xs={12} sm={6} md={4} key={product.idMeal}>
+              <Card sx={{ display: "flex", flexDirection: "column", height: "100%" }}>
+                <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", p: 2 }}>
                   <CardContent>
                     <Tooltip title={product.strMeal} placement="top">
-                      <Typography variant="h6" component="div">
-                        {product.strMeal.length > 15
-                          ? `${product.strMeal.slice(0, 15)}...`
+                      <Typography
+                        variant="h6"
+                        component="div"
+                        sx={{
+                          textAlign: "center",
+                          fontSize: { xs: "1rem", sm: "1.25rem" },
+                        }}
+                      >
+                        {product.strMeal.length > 20
+                          ? `${product.strMeal.slice(0, 20)}...`
                           : product.strMeal}
                       </Typography>
                     </Tooltip>
                   </CardContent>
                   <CardMedia
                     component="img"
-                    height="90"
+                    height="150"
                     image={product.strMealThumb}
                     alt={product.strMeal}
-                    style={{ borderRadius: "5px", marginLeft: "10px" }}
-
-
                     sx={{
+                      borderRadius: 2,
                       width: "100%",
                       height: "150px",
                       objectFit: "cover",
-                      borderRadius: 2,
                       marginTop: 2,
                     }}
                   />
-                  <Box className="d-flex justify-content-between p-2">
+                  <Box sx={{ display: "flex", justifyContent: "space-between", width: "100%", p: 2 }}>
                     <Tooltip title="Favorite" placement="top">
-                      <FavoriteBorderIcon />
+                      <FavoriteBorderIcon
+                        onClick={() => dispatch(addFavorite(product))}
+                        sx={{ cursor: "pointer" }}
+                      />
                     </Tooltip>
                     <Tooltip title="Add to cart" placement="top">
                       <AddShoppingCartIcon
-                        className="mt-4"
                         onClick={() => dispatch(addProduct(product))}
-                        style={{ cursor: "pointer" }}
+                        sx={{ cursor: "pointer" }}
                       />
                     </Tooltip>
                   </Box>
@@ -131,10 +145,3 @@ const Product = () => {
 };
 
 export default Product;
-
-
-
-
-
-
-

@@ -33,6 +33,10 @@ import Sheikhupura from '../../../Images/Sheikhupura.jpg';
 import Sialkot from '../../../Images/Sialkot.webp';
 import Sukkur from '../../../Images/Sukkur.webp';
 import WahCantt from '../../../Images/WahhCannt.webp';
+import { AddLocation } from '@mui/icons-material';
+import { useDispatch } from 'react-redux';
+
+import { Addlocation } from '../../Slices/locationSlice';
 
 // City data array
 const cities = [
@@ -69,8 +73,9 @@ const cities = [
 ];
 
 const Card = () => {
-    const [selectedCity, setSelectedCity] = useState('');
+    const usedispach =useDispatch()
 
+  
     return (
         <div className="container py-5">
             <Typography variant="h4" align="start" gutterBottom>
@@ -79,7 +84,7 @@ const Card = () => {
             <Grid container spacing={2}>
                 {cities.map((city) => (
                     <Grid item xs={6} sm={6} md={4} lg={3} key={city.id}>
-                        <Link to="/Resturant" style={{ textDecoration: 'none' }}>
+                        <Link  to="/Resturant" style={{ textDecoration: 'none' }}>
                             <Box
                                 sx={{
                                     height: 180,
@@ -105,7 +110,7 @@ const Card = () => {
                                     }}
                                 />
 
-                                <Button
+                                <Button  onClick={() => usedispach(AddLocation(city))}
                                     variant="contained"
                                     sx={{
                                         position: 'absolute',
@@ -119,7 +124,7 @@ const Card = () => {
                                         margin: '5px',
                                         fontSize: '0.9rem',
                                     }}
-                                    onClick={() => setSelectedCity(city.name)}
+                                   
                                 >
                                     {city.name}
                                 </Button>
@@ -134,7 +139,6 @@ const Card = () => {
 };
 
 export default Card;
-
 
 
 

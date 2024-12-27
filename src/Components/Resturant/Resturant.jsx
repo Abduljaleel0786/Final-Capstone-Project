@@ -25,6 +25,8 @@ import Resturant7 from '../../Images/Restuant 07.webp';
 import Resturant8 from '../../Images/Resturant 08.webp';
 import Resturant9 from '../../Images/Resturant 09.webp';
 import Resturant10 from '../../Images/Resturant 10.webp';
+import Navbar from "../Home_Page/Navbar/navbar";
+import Footer from "../Home_Page/Footer/Footer";
 
 
 const Restaurant = () => {
@@ -222,7 +224,9 @@ const Restaurant = () => {
                     <Button onClick={handleClose} sx={{ marginTop: 2 }}>Close</Button>
                 </Box>
             </Modal>
+            <Footer/>
         </Box>
+       
     );
 };
 

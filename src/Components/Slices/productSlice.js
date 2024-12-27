@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   name: 'products',
   items: [],
-  isToast: false,
+  cartToastMessage: '',
 };
 
 export const productSlice = createSlice({
@@ -12,12 +12,13 @@ export const productSlice = createSlice({
   reducers: {
     addProduct: (state, action) => {
       const isExit = state.items.find((item) => item.idMeal === action.payload.idMeal);
+
       
       if (isExit) {
-        state.isToast = true;  // Set toast flag to true when a product is added
+        state.cartToastMessage = 'Product already added to cart!';
       } else {
         state.items.push({ ...action.payload, quantity: 1 });
-        state.isToast = true;  // Set toast flag to true when a new product is added
+        state.cartToastMessage = 'Product added to cart successfully!';
       }
     },
 

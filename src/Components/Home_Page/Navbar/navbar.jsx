@@ -71,6 +71,7 @@ function Navbar() {
 
     const handleFavoriteCartOpen = () => setFavoriteCartOpen(true);
     const handleFavoriteCartClose = () => setFavoriteCartOpen(false);
+    const location = useSelector((state) => state.location);
 
     return (
         <Box>
@@ -138,7 +139,12 @@ function Navbar() {
                                 </Grid>
                             </Link>
                         </Grid>
+{/*  */}
 
+
+{location?.name && <p className=' text-black d-flex align-items-center mt-3 fs-6 text-opacity-50 '> <b className='location'>  <Icon className='fs-5' icon="akar-icons:location" /> Location: {location.name} </b></p>}
+
+{/*  */}
                         <Grid item>
                             <Grid container alignItems="center" spacing={1}>
                                 {isLoggedIn ? (
@@ -171,7 +177,9 @@ function Navbar() {
                                 )}
                                 <Grid item>
                                     <IconButton onClick={handleFavoriteCartOpen}>
+                                    <Badge badgeContent color="error">
                                         <FavoriteBorderIcon />
+                                        </Badge>
                                     </IconButton>
                                 </Grid>
                                 <Grid item>
