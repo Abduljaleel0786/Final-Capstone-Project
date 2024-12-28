@@ -13,11 +13,15 @@ export const productSlice = createSlice({
     addProduct: (state, action) => {
       const isExit = state.items.find((item) => item.idMeal === action.payload.idMeal);
 
-      
       if (isExit) {
         state.cartToastMessage = 'Product already added to cart!';
       } else {
-        state.items.push({ ...action.payload, quantity: 1 });
+        // Adding price with a fixed value of 450
+        state.items.push({ 
+          ...action.payload, 
+          quantity: 1, 
+          price: 450 // Fixed price for all products
+        });
         state.cartToastMessage = 'Product added to cart successfully!';
       }
     },
@@ -37,9 +41,13 @@ export const productSlice = createSlice({
         state.items = state.items.filter((item) => item.idMeal !== action.payload.idMeal);
       }
     },
+
+    removeProduct: (state, action) => {
+      state.items = state.items.filter((item) => item.idMeal !== action.payload.idMeal);
+    },
   },
 });
 
-export const { addProduct, increaseQuantity, decreaseQuantity } = productSlice.actions;
+export const { addProduct, increaseQuantity, decreaseQuantity, removeProduct } = productSlice.actions;
 
 export default productSlice.reducer;
