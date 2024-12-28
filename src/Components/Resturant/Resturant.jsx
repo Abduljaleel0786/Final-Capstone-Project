@@ -8,7 +8,6 @@ import {
     Card,
     CardMedia,
     CardContent,
-    Divider,
     Modal,
     Button
 } from "@mui/material";
@@ -28,7 +27,6 @@ import Resturant10 from '../../Images/Resturant 10.webp';
 import Navbar from "../Home_Page/Navbar/navbar";
 import Footer from "../Home_Page/Footer/Footer";
 
-
 const Restaurant = () => {
 
     const navigate = useNavigate();
@@ -37,7 +35,6 @@ const Restaurant = () => {
 
     const handleClose = () => setOpenModal(false);
 
-    // Dummy data for restaurants
     const products = [
         {
             id: 'SpiceDelight',
@@ -120,13 +117,16 @@ const Restaurant = () => {
             setSelectedRestaurant(product.name);
             setOpenModal(true);
         } else {
-            navigate(`/ProductDetails/${product.id}`);
+            navigate(`/ProductDetails/${product.id}`, {
+                state: { image: product.image, name: product.name }
+            });
         }
     };
 
     return (
         <Box>
-            {/* Hero Section */}
+
+
             <Box
                 sx={{
                     display: "flex",
@@ -179,54 +179,35 @@ const Restaurant = () => {
                 </Container>
             </Box>
 
-            {/* Restaurant Cards */}
             <Container sx={{ marginTop: "40px" }}>
-                <Typography
-                    variant="h4"
-                    component="h2"
-                    sx={{
-                        marginBottom: "20px",
-                        fontWeight: "bold",
-                        color: "#333",
-                        fontSize: { xs: "28px", sm: "34px", md: "40px" },
-                    }}
-                >
-                   All Restaurants
-                </Typography>
-
+                <Typography variant="h4">All Restaurants</Typography>
                 <Grid container spacing={4}>
                     {products.map((product) => (
-                        <Grid item xs={12} sm={6} md={4} lg={4} key={product.id}>
+                        <Grid item xs={12} sm={6} md={4} key={product.id}>
                             <Card
-                                sx={{ transition: "0.3s", boxShadow: 3, borderRadius: "12px", overflow: "hidden", '&:hover': { boxShadow: 6, transform: "scale(1.05)", cursor: "pointer" }, opacity: product.isClosed ? 0.5 : 1, position: 'relative' }}
+                                sx={{
+                                    transition: "0.3s",
+                                    boxShadow: 3,
+                                    borderRadius: "12px",
+                                    '&:hover': { boxShadow: 6, transform: "scale(1.05)" },
+                                    opacity: product.isClosed ? 0.5 : 1
+                                }}
                                 onClick={() => handleCardClick(product)}
                             >
                                 <CardMedia component="img" height="200" image={product.image} alt={product.name} />
-                                {product.isClosed && (
-                                    <Typography variant="h6" sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', color: 'white', fontWeight: 'bolder', background: '#fff', color :'#e21b70',  padding: '5px 10px', borderRadius: '4px' }}>Closed</Typography>
-                                )}
-                                <CardContent sx={{ padding: "16px", textAlign: "center" }}>
+                                <CardContent>
                                     <Typography variant="h6">{product.name}</Typography>
                                     <Typography>Rating: {product.rating}/5 ✨</Typography>
                                     <Typography>{product.type}</Typography>
+                                    {product.isClosed && <Typography color="error">Closed</Typography>}
                                 </CardContent>
-                                <Divider />
                             </Card>
                         </Grid>
                     ))}
                 </Grid>
             </Container>
-
-            {/* Modal */}
-            <Modal open={openModal} onClose={handleClose}>
-                <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 300, bgcolor: 'background.paper', boxShadow: 24, p: 4 }}>
-                    <Typography variant="h6" component="h2">{selectedRestaurant} is Closed</Typography>
-                    <Button onClick={handleClose} sx={{ marginTop: 2 }}>Close</Button>
-                </Box>
-            </Modal>
-            <Footer/>
+            <Footer />
         </Box>
-       
     );
 };
 

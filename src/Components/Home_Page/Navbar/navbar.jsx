@@ -30,7 +30,10 @@ function Navbar() {
   const queryParams = new URLSearchParams(location.search);
   const cityName = queryParams.get("city") || "";
 
-  
+
+
+  const favoriteItems = useSelector((state) => state.favorite.items);
+
   const [shoppingCartOpen, setShoppingCartOpen] = useState(false);
   const [favoriteCartOpen, setFavoriteCartOpen] = useState(false);
 
@@ -80,9 +83,15 @@ function Navbar() {
 
   const handleFavoriteCartOpen = () => setFavoriteCartOpen(true);
   const handleFavoriteCartClose = () => setFavoriteCartOpen(false);
+  const Value = useSelector((state) => state.Location.Value);
+
+  
+console.log(Value);
+
 
   return (
     <Box>
+    
       {/* Top Bar */}
       <AppBar className="d-none d-lg-block" position="sticky" sx={{ backgroundColor: '#c21760' }}>
         <Box className="container">
@@ -158,11 +167,11 @@ function Navbar() {
                   fontWeight: "bold",
                 }}
               >
-                Location: {cityName}
+                Location: {Value}
               </Typography>
             </Box>
 
-            
+
             <Grid item>
               {location?.name && (
                 <Typography variant="body2" color="textSecondary">
@@ -193,13 +202,17 @@ function Navbar() {
                     </Grid>
                   </>
                 )}
+
+
                 <Grid item>
                   <IconButton onClick={handleFavoriteCartOpen}>
-                    <Badge badgeContent color="error">
+                    <Badge badgeContent={favoriteItems.length} color="error">
                       <FavoriteBorderIcon />
                     </Badge>
                   </IconButton>
                 </Grid>
+
+
                 <Grid item>
                   <IconButton onClick={handleShoppingCartOpen}>
                     <Badge badgeContent={count.items.length} color="error">
