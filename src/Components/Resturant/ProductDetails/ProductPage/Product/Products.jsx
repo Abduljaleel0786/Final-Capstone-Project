@@ -190,81 +190,121 @@ const Product = () => {
         </Grid>
       )}
 
-
       <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
-        <Box className=' bg-white' sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 400, p: 4 }}>
-          <h2 style={{ textAlign: 'center', marginBottom: '16px' }}>Fill this form for product added</h2>
+        <Box
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: 400,
+            p: 4,
+            backgroundColor: "white",
+          }}
+        >
+          <h2 style={{ textAlign: "center", marginBottom: "16px" }}>Fill this form for product added</h2>
           <form onSubmit={handleSubmit(onSubmit)}>
             <TextField
-              className=" mt-2"
               fullWidth
               label="Name"
-              {...register("name", { required: 'Name is required' })}
+              {...register("name", { required: "Name is required" })}
               error={!!errors.name}
               helperText={errors.name?.message}
             />
             <TextField
-              className=" mt-2"
               fullWidth
               label="Email"
               {...register("email", {
-                required: 'Email is required',
+                required: "Email is required",
                 pattern: {
-
-                  message: 'Invalid email address'
-                }
+                  message: "Invalid email address",
+                },
               })}
               error={!!errors.email}
               helperText={errors.email?.message}
             />
             <TextField
-              className=" mt-2"
               fullWidth
               label="Phone"
-              {...register("phone", {
-                required: 'Phone number is required',
-                pattern: {
-
-                  message: 'Invalid phone number'
-                }
-              })}
+              {...register("phone", { required: "Phone number is required" })}
               error={!!errors.phone}
               helperText={errors.phone?.message}
             />
             <TextField
-              className=" mt-2"
               fullWidth
               label="Address"
-              {...register("address", { required: 'Address is required' })}
+              {...register("address", { required: "Address is required" })}
               error={!!errors.address}
               helperText={errors.address?.message}
             />
             <TextField
-              className=" mt-2"
               fullWidth
               label="City"
-              {...register("city", { required: 'City is required' })}
+              {...register("city", { required: "City is required" })}
               error={!!errors.city}
               helperText={errors.city?.message}
             />
             <TextField
-              className=" mt-2"
               fullWidth
               label="Province"
-              {...register("province", { required: 'Province is required' })}
+              {...register("province", { required: "Province is required" })}
               error={!!errors.province}
               helperText={errors.province?.message}
             />
-            <Button type="submit" style={{ backgroundColor: '#ec008c', color: 'white', marginTop: '16px' }}>Add to Cart</Button>
+            <Button
+              type="submit"
+              style={{
+                backgroundColor: "#ec008c",
+                color: "white",
+                marginTop: "16px",
+                width: "100%",
+              }}
+            >
+              Add to Cart
+            </Button>
           </form>
         </Box>
       </Modal>
 
-
-
+      {/* Favorite Modal */}
+      <Modal open={favoriteModalOpen} onClose={() => setFavoriteModalOpen(false)}>
+        <Box
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: 400,
+            p: 4,
+            backgroundColor: "white",
+            borderRadius: "16px",
+          }}
+        >
+          <IconButton
+            sx={{ position: "absolute", top: 10, right: 10 }}
+            onClick={() => setFavoriteModalOpen(false)}
+          >
+            <CloseIcon />
+          </IconButton>
+          <Typography variant="h5" sx={{ textAlign: "center", marginBottom: "16px", color: "#FF4081" }}>
+            Are you sure you want to add this product to your favorites?
+          </Typography>
+          <Button
+            onClick={handleFavoriteConfirmation}
+            sx={{
+              backgroundColor: "#ec008c",
+              color: "white",
+              width: "100%",
+              marginTop: "16px",
+              padding: "10px 0",
+            }}
+          >
+            Yes, Add to Favorites
+          </Button>
+        </Box>
+      </Modal>
     </Box>
   );
 };
 
 export default Product;
-
