@@ -28,7 +28,7 @@ function Navbar() {
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const cityName = queryParams.get("city") || "";
+  const cityName = queryParams.get("city") || "";  
 
 
 
@@ -64,12 +64,12 @@ function Navbar() {
 
   const handleLogout = () => {
     localStorage.removeItem('user');
-    window.dispatchEvent(new Event('storage')); // Trigger storage event
+    window.dispatchEvent(new Event('storage'));
   };
 
   const handleLogin = (user) => {
     localStorage.setItem('user', JSON.stringify(user));
-    window.dispatchEvent(new Event('storage')); // Trigger storage event
+    window.dispatchEvent(new Event('storage')); 
   };
 
   const theme = useTheme();
@@ -83,10 +83,7 @@ function Navbar() {
 
   const handleFavoriteCartOpen = () => setFavoriteCartOpen(true);
   const handleFavoriteCartClose = () => setFavoriteCartOpen(false);
-  const Value = useSelector((state) => state.Location.Value);
 
-  
-console.log(Value);
 
 
   return (
@@ -167,18 +164,11 @@ console.log(Value);
                   fontWeight: "bold",
                 }}
               >
-                Location: {Value}
+                Location:{cityName}
               </Typography>
             </Box>
 
 
-            <Grid item>
-              {location?.name && (
-                <Typography variant="body2" color="textSecondary">
-                  <Icon icon="akar-icons:location" /> Location: {location.name}
-                </Typography>
-              )}
-            </Grid>
             <Grid item>
               <Grid container alignItems="center" spacing={1}>
                 {isLoggedIn ? (

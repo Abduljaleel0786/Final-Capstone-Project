@@ -1,4 +1,4 @@
-import { Box, Grid, Typography, Button, CardMedia, CardContent } from '@mui/material';
+import { Box, Grid, Typography, Button,  } from '@mui/material';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -72,7 +72,7 @@ const cities = [
 ];
 
 const Card = () => {
-    const usedispch = useDispatch();
+   
 
  
 
@@ -84,7 +84,8 @@ const Card = () => {
             <Grid container spacing={2}>
                 {cities.map((city) => (
                     <Grid item xs={6} sm={6} md={4} lg={3} key={city.id}>
-                        <Link to={`/Resturant?city?city=${city.name}`} style={{ textDecoration: 'none' }}>
+                      <Link to={`/Resturant?city=${city.name}`} style={{ textDecoration: 'none' }}>
+
                             <Box
                                 sx={{
                                     height: 180,
@@ -97,7 +98,7 @@ const Card = () => {
                                     position: 'relative',
                                 }}
                             >
-                                <img onClick={()=>(usedispch(Addlocation(city)))}
+                                <img
                                     src={city.image}
                                     alt={city.name}
                                     style={{

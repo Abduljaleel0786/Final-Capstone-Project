@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import productReducer from "../Components/Slices/productSlice";
 import favoriteReducer from "../Components/Slices/favouriteSlice";
-import locationReducer from "../Components/Slices/Location"
+
 
 
 export const store = configureStore({
@@ -9,6 +9,6 @@ export const store = configureStore({
 
     products: productReducer,
     favorite: favoriteReducer,
-    Location:locationReducer
+   
   },
 });

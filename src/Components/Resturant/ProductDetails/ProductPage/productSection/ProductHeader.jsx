@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Typography, Grid, Stack, Button, Dialog, Card, CardContent, CardMedia, TextField, Tabs, Tab } from '@mui/material';
-import { Breadcrumbs, Link } from '@mui/material';
+import { Breadcrumbs, } from '@mui/material';
 import { Icon } from '@iconify/react';
 import StarIcon from '@mui/icons-material/Star';
 import InfoIcon from '@mui/icons-material/Info';
@@ -8,7 +8,7 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const ProductHeader = () => {
   const [openDeliveryModal, setOpenDeliveryModal] = useState(false);
@@ -42,26 +42,23 @@ const ProductHeader = () => {
       paddingBottom: '20px',
       width: '100%',
     }}>
-      {/* Breadcrumb Navigation */}
-      <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: '1rem', paddingLeft: '10px' }}>
-        <Link to="/" style={{ textDecoration: 'none' }}>
-          Homepage
-        </Link>
-        <Link
-          underline="hover"
-          color="primary"
-          to="/Resturant"
-          sx={{ fontWeight: 500, fontSize: '1rem', transition: 'color 0.3s' }}
-        >
-          Restaurant
-        </Link>
-        <Typography
-          color="text.primary"
-          sx={{ fontWeight: 600, fontSize: '1rem' }}
-        >
-          {restaurant.name}
-        </Typography>
-      </Breadcrumbs>
+  <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: '1rem', paddingLeft: '10px' }}>
+  <Link to='/'>Home</Link>
+  <Link 
+    to="/Restaurant" 
+    underline="hover" 
+    color="primary" 
+    sx={{ fontWeight: 500, fontSize: '1rem', transition: 'color 0.3s' }}
+  >
+    Restaurant
+  </Link>
+  <Typography color="text.primary" sx={{ fontWeight: 600, fontSize: '1rem' }}>
+    {restaurant.name}
+  </Typography>
+</Breadcrumbs>
+
+
+
 
 
       {/* Main Card */}

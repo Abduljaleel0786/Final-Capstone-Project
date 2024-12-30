@@ -190,81 +190,90 @@ const Product = () => {
         </Grid>
       )}
 
-      <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
-        <Box
-          sx={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            width: 400,
-            p: 4,
-            backgroundColor: "white",
-          }}
-        >
-          <h2 style={{ textAlign: "center", marginBottom: "16px" }}>Fill this form for product added</h2>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <TextField
-              fullWidth
-              label="Name"
-              {...register("name", { required: "Name is required" })}
-              error={!!errors.name}
-              helperText={errors.name?.message}
-            />
-            <TextField
-              fullWidth
-              label="Email"
-              {...register("email", {
-                required: "Email is required",
-                pattern: {
-                  message: "Invalid email address",
-                },
-              })}
-              error={!!errors.email}
-              helperText={errors.email?.message}
-            />
-            <TextField
-              fullWidth
-              label="Phone"
-              {...register("phone", { required: "Phone number is required" })}
-              error={!!errors.phone}
-              helperText={errors.phone?.message}
-            />
-            <TextField
-              fullWidth
-              label="Address"
-              {...register("address", { required: "Address is required" })}
-              error={!!errors.address}
-              helperText={errors.address?.message}
-            />
-            <TextField
-              fullWidth
-              label="City"
-              {...register("city", { required: "City is required" })}
-              error={!!errors.city}
-              helperText={errors.city?.message}
-            />
-            <TextField
-              fullWidth
-              label="Province"
-              {...register("province", { required: "Province is required" })}
-              error={!!errors.province}
-              helperText={errors.province?.message}
-            />
-            <Button
-              type="submit"
-              style={{
-                backgroundColor: "#ec008c",
-                color: "white",
-                marginTop: "16px",
-                width: "100%",
-              }}
-            >
-              Add to Cart
-            </Button>
-          </form>
-        </Box>
-      </Modal>
+   
+
+<Modal open={modalOpen} onClose={() => setModalOpen(false)}>
+  <Box
+    sx={{
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
+      width: 400,
+      p: 4,
+      backgroundColor: "white",
+    }}
+  >
+    <h2 style={{ textAlign: "center", marginBottom: "16px" }}>Fill this form for product added</h2>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <TextField
+        fullWidth
+        label="Name"
+        {...register("name", { required: "Name is required" })}
+        error={!!errors.name}
+        helperText={errors.name?.message}
+        sx={{ marginBottom: "16px" }}  
+      />
+      <TextField
+        fullWidth
+        label="Email"
+        {...register("email", {
+          required: "Email is required",
+          pattern: {
+            message: "Invalid email address",
+          },
+        })}
+        error={!!errors.email}
+        helperText={errors.email?.message}
+        sx={{ marginBottom: "16px" }}  
+      />
+      <TextField
+        fullWidth
+        label="Phone"
+        {...register("phone", { required: "Phone number is required" })}
+        error={!!errors.phone}
+        helperText={errors.phone?.message}
+        sx={{ marginBottom: "16px" }}  
+      />
+      <TextField
+        fullWidth
+        label="Address"
+        {...register("address", { required: "Address is required" })}
+        error={!!errors.address}
+        helperText={errors.address?.message}
+        sx={{ marginBottom: "16px" }}
+      />
+      <TextField
+        fullWidth
+        label="City"
+        {...register("city", { required: "City is required" })}
+        error={!!errors.city}
+        helperText={errors.city?.message}
+        sx={{ marginBottom: "16px" }}  
+      />
+      <TextField
+        fullWidth
+        label="Province"
+        {...register("province", { required: "Province is required" })}
+        error={!!errors.province}
+        helperText={errors.province?.message}
+        sx={{ marginBottom: "16px" }}  
+      />
+      <Button
+        type="submit"
+        style={{
+          backgroundColor: "#ec008c",
+          color: "white",
+          marginTop: "16px",
+          width: "100%",
+        }}
+      >
+        Add to Cart
+      </Button>
+    </form>
+  </Box>
+</Modal>
+
 
       {/* Favorite Modal */}
       <Modal open={favoriteModalOpen} onClose={() => setFavoriteModalOpen(false)}>
