@@ -34,7 +34,6 @@ import Sialkot from '../../../Images/Sialkot.webp';
 import Sukkur from '../../../Images/Sukkur.webp';
 import WahCantt from '../../../Images/WahhCannt.webp';
 import { useDispatch } from 'react-redux';
-import { Addlocation } from '../../Slices/Location';
 
 
 // // City data array
