@@ -24,13 +24,13 @@ import { addFavorite } from "../../../../Slices/favouriteSlice";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoginModal from "../../../LoginModal/LoginModal";
+import { useForm } from "react-hook-form";
 
 const Product = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
-  const [email, setEmail] = useState("");
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [loginModalOpen, setLoginModalOpen] = useState(false);
   const [favoriteModalOpen, setFavoriteModalOpen] = useState(false);
@@ -38,10 +38,16 @@ const Product = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
+
   const { cartToastMessage } = useSelector((state) => state.products);
   const { favoriteToastMessage } = useSelector((state) => state.favorite);
 
-  // Fetch products on component mount
   useEffect(() => {
     const fetchProducts = async () => {
       setLoading(true);
@@ -64,7 +70,6 @@ const Product = () => {
     fetchProducts();
   }, []);
 
-  // Show toast messages for cart and favorite actions
   useEffect(() => {
     if (cartToastMessage) {
       toast.success(cartToastMessage);
@@ -77,51 +82,37 @@ const Product = () => {
     }
   }, [favoriteToastMessage]);
 
-  // Handle adding to the cart
   const handleAddToCart = (product) => {
     setSelectedProduct(product);
     setModalOpen(true);
-
-    // Pre-fill email with the one stored in localStorage
-    const storedUser = JSON.parse(localStorage.getItem("user"));
-    if (storedUser && storedUser.email) {
-      setEmail(storedUser.email); // Set the email to the state
-    }
+    reset();
   };
 
-  // Handle email submit
-  const handleEmailSubmit = () => {
+  const handleAddToFavorite = (product) => {
+    setFavoriteProduct(product);
+    setFavoriteModalOpen(true);
+  };
+
+  const handleFavoriteConfirmation = () => {
+    dispatch(addFavorite(favoriteProduct));
+    toast.success("Product added to favorites successfully!");
+    setFavoriteModalOpen(false);
+  };
+
+  const onSubmit = (data) => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
 
-    if (!storedUser) {
-      toast.error("Please sign up or log in first.");
+    if (!storedUser || data.email !== storedUser.email) {
+      toast.error("Please sign up or log in first or enter correct email.");
       setModalOpen(false);
       setLoginModalOpen(true);
-      return;
-    }
-
-    if (email !== storedUser.email) {
-      toast.error("Enter the same email used during login.");
       return;
     }
 
     dispatch(addProduct(selectedProduct));
     toast.success("Product added to cart successfully!");
     setModalOpen(false);
-    setEmail(""); // Reset email input field after submission
-  };
-
-  // Handle favorite product
-  const handleAddToFavorite = (product) => {
-    setFavoriteProduct(product);
-    setFavoriteModalOpen(true);
-  };
-
-  // Handle favorite confirmation
-  const handleFavoriteConfirmation = () => {
-    dispatch(addFavorite(favoriteProduct));
-    toast.success("Product added to favorites successfully!");
-    setFavoriteModalOpen(false);
+    reset();
   };
 
   return (
@@ -129,7 +120,12 @@ const Product = () => {
       <Typography
         variant="h4"
         component="h2"
-        sx={{ marginBottom: "20px", fontWeight: "bold", fontSize: { xs: "1.5rem", sm: "2rem" } }}
+        sx={{
+          marginBottom: "20px",
+          fontWeight: "bold",
+          fontSize: { xs: "1.5rem", sm: "2rem" },
+          color: "#FF4081",
+        }}
       >
         Popular <br />
         Most ordered right now.
@@ -159,7 +155,7 @@ const Product = () => {
                   height: "480px",
                   transition: "transform 0.3s",
                   "&:hover": { transform: "scale(1.05)" },
-                  backgroundColor: "#f9f9f9", // Added light background for card
+                  backgroundColor: "#f9f9f9",
                 }}
               >
                 <CardMedia
@@ -167,69 +163,23 @@ const Product = () => {
                   height="250"
                   image={product.strMealThumb}
                   alt={product.strMeal}
-                  sx={{
-                    objectFit: "cover",
-                    transition: "transform 0.3s",
-                    "&:hover": { transform: "scale(1.1)" },
-                  }}
                 />
-                <CardContent
-                  sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                    padding: "16px",
-                    position: "relative",
-                    backgroundColor: "#ffffff",
-                    height: "auto",
-                    color: "#333",
-                  }}
-                >
-                  <Typography
-                    variant="h6"
-                    sx={{
-                      fontSize: { xs: "1rem", sm: "1.25rem" },
-                      fontWeight: "bold",
-                      textOverflow: "ellipsis",
-                      whiteSpace: "nowrap",
-                      overflow: "hidden",
-                      textAlign: "center",
-                    }}
-                  >
+                <CardContent>
+                  <Typography variant="h6" sx={{ fontWeight: "bold" }}>
                     {product.strMeal}
                   </Typography>
-                  {/* Display fixed price */}
-                  <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    sx={{
-                      textAlign: "center",
-                      fontWeight: "bold",
-                      mt: 1,
-                      color: "#FF4081", // Pink color
-                    }}
-                  >
+                  <Typography variant="body2" color="textSecondary">
                     ₹450
                   </Typography>
-
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      gap: 2,
-                      alignItems: "center",
-                      mt: 2,
-                    }}
-                  >
-                    <Tooltip title="Favorite" placement="top">
-                      <IconButton onClick={() => handleAddToFavorite(product)} sx={{ cursor: "pointer" }}>
-                        <FavoriteBorderIcon sx={{ color: "#FF4081" }} />
+                  <Box sx={{ display: "flex", justifyContent: "space-between", mt: 2 }}>
+                    <Tooltip title="Favorite">
+                      <IconButton onClick={() => handleAddToFavorite(product)}>
+                        <FavoriteBorderIcon />
                       </IconButton>
                     </Tooltip>
-
-                    <Tooltip title="Add to cart" placement="top">
-                      <IconButton onClick={() => handleAddToCart(product)} sx={{ cursor: "pointer" }}>
-                        <AddShoppingCartIcon sx={{ color: "#FF4081" }} />
+                    <Tooltip title="Add to cart">
+                      <IconButton onClick={() => handleAddToCart(product)}>
+                        <AddShoppingCartIcon />
                       </IconButton>
                     </Tooltip>
                   </Box>
@@ -240,86 +190,81 @@ const Product = () => {
         </Grid>
       )}
 
-      {/* Modal for Favorite Confirmation */}
-      <Modal open={favoriteModalOpen} onClose={() => setFavoriteModalOpen(false)}>
-        <Box
-          sx={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            width: 400,
-            bgcolor: "background.paper",
-            boxShadow: 24,
-            p: 4,
-            borderRadius: 2,
-          }}
-        >
-          <IconButton onClick={() => setFavoriteModalOpen(false)} sx={{ position: "absolute", top: 8, right: 8 }}>
-            <CloseIcon />
-          </IconButton>
-          <Typography variant="h6" sx={{ mb: 2, fontWeight: "bold", color: "#333" }}>
-            Are you sure you want to add this item to your favorites?
-          </Typography>
-          <Button
-            variant="contained"
-            color="secondary"
-            fullWidth
-            sx={{ mt: 2, backgroundColor: "#FF4081" }}
-            onClick={handleFavoriteConfirmation}
-          >
-            Yes, Add to Favorites
-          </Button>
-        </Box>
-      </Modal>
 
-      {/* Add to Cart Modal */}
       <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
-        <Box
-          sx={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            width: 400,
-            bgcolor: "background.paper",
-            boxShadow: 24,
-            p: 4,
-            borderRadius: 2,
-          }}
-        >
-          <IconButton onClick={() => setModalOpen(false)} sx={{ position: "absolute", top: 8, right: 8 }}>
-            <CloseIcon />
-          </IconButton>
-          <Typography variant="h6" sx={{ mb: 2, fontWeight: "bold", color: "#333" }}>
-            To add this item to your cart, please enter your email:
-          </Typography>
-          <TextField
-            fullWidth
-            label="Email"
-            variant="outlined"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <Button
-            variant="contained"
-            color="secondary"
-            sx={{ mt: 2, backgroundColor: "#FF4081" }}
-            onClick={handleEmailSubmit}
-          >
-            Add to Cart
-          </Button>
+        <Box className=' bg-white' sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 400, p: 4 }}>
+          <h2 style={{ textAlign: 'center', marginBottom: '16px' }}>Fill this form for product added</h2>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <TextField
+              className=" mt-2"
+              fullWidth
+              label="Name"
+              {...register("name", { required: 'Name is required' })}
+              error={!!errors.name}
+              helperText={errors.name?.message}
+            />
+            <TextField
+              className=" mt-2"
+              fullWidth
+              label="Email"
+              {...register("email", {
+                required: 'Email is required',
+                pattern: {
+
+                  message: 'Invalid email address'
+                }
+              })}
+              error={!!errors.email}
+              helperText={errors.email?.message}
+            />
+            <TextField
+              className=" mt-2"
+              fullWidth
+              label="Phone"
+              {...register("phone", {
+                required: 'Phone number is required',
+                pattern: {
+
+                  message: 'Invalid phone number'
+                }
+              })}
+              error={!!errors.phone}
+              helperText={errors.phone?.message}
+            />
+            <TextField
+              className=" mt-2"
+              fullWidth
+              label="Address"
+              {...register("address", { required: 'Address is required' })}
+              error={!!errors.address}
+              helperText={errors.address?.message}
+            />
+            <TextField
+              className=" mt-2"
+              fullWidth
+              label="City"
+              {...register("city", { required: 'City is required' })}
+              error={!!errors.city}
+              helperText={errors.city?.message}
+            />
+            <TextField
+              className=" mt-2"
+              fullWidth
+              label="Province"
+              {...register("province", { required: 'Province is required' })}
+              error={!!errors.province}
+              helperText={errors.province?.message}
+            />
+            <Button type="submit" style={{ backgroundColor: '#ec008c', color: 'white', marginTop: '16px' }}>Add to Cart</Button>
+          </form>
         </Box>
       </Modal>
 
-      <LoginModal open={loginModalOpen} handleClose={() => setLoginModalOpen(false)} />
+
+
     </Box>
   );
 };
 
 export default Product;
-
-
-
-
 

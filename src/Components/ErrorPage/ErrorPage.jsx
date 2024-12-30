@@ -1,11 +1,10 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import Error from '../../Images/ErrorImg.jpg'
 
 import React from "react";
+import { Link } from "react-router-dom";
 
 const ErrorPage = () => {
-
-   
     return (
         <Box
             sx={{
@@ -19,7 +18,6 @@ const ErrorPage = () => {
                 padding: 3,
             }}
         >
-           
             <Box
                 component="img"
                 src={Error} 
@@ -29,8 +27,9 @@ const ErrorPage = () => {
             <Typography variant="h3" color="error" gutterBottom>
                 Oops! Something went wrong.
             </Typography>
-    
-            
+            <Link to='/'>
+                <Button variant="contained" color='#c2185b' >Home Page</Button>
+            </Link>
         </Box>
     );
 };

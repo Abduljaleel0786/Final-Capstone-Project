@@ -44,12 +44,7 @@ const ProductHeader = () => {
     }}>
       {/* Breadcrumb Navigation */}
       <Breadcrumbs aria-label="breadcrumb" sx={{ marginBottom: '1rem', paddingLeft: '10px' }}>
-        <Link
-          underline="hover"
-          color="primary"
-          to="/"
-          sx={{ fontWeight: 500, fontSize: '1rem', transition: 'color 0.3s' }}
-        >
+        <Link to="/" style={{ textDecoration: 'none' }}>
           Homepage
         </Link>
         <Link

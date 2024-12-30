@@ -25,7 +25,7 @@ const DeliveryPaymentSection = () => {
   const totalPrice = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
   return (
-    <Box
+    <Box className=' mt-5'
       sx={{
         flex: 1,
         border: "1px solid #e0e0e0",
@@ -33,7 +33,6 @@ const DeliveryPaymentSection = () => {
         boxShadow: 3,
         padding: 3,
         textAlign: "center",
-        height: "100%",
         minHeight: "750px",
         display: "flex",
         flexDirection: "column",
