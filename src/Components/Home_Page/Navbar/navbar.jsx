@@ -11,12 +11,13 @@ import Headerimg from '../../../Images/headericon.png';
 import Logo from '../../../Images/Logo.jpeg';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { Badge, IconButton, Menu, MenuItem } from '@mui/material';
+import { Badge, IconButton } from '@mui/material';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 
+// Import Modals
 import SignUpModal from '../../SignUpPage/SignUpModal';
 import LoginModal from '../../Resturant/LoginModal/LoginModal';
 import CartDrawer from '../../Resturant/CartList/CartList';
@@ -24,37 +25,23 @@ import FavoriteCart from '../../FavoriteCart/FavoriteCart';
 
 function Navbar() {
 
-  
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const cityName = queryParams.get("city") || "";
 
+
+
   const favoriteItems = useSelector((state) => state.favorite.items);
-  const count = useSelector((state) => state.products);
 
   const [shoppingCartOpen, setShoppingCartOpen] = useState(false);
   const [favoriteCartOpen, setFavoriteCartOpen] = useState(false);
+
+  // State for SignUp and Login modals
   const [openSignUp, setOpenSignUp] = useState(false);
   const [openLogin, setOpenLogin] = useState(false);
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState('');
-
-  const [anchorEl, setAnchorEl] = useState(null); // For menu anchor
-  const openMenu = Boolean(anchorEl);
-
-  const handleLogout = () => {
-    localStorage.removeItem('user');
-    window.dispatchEvent(new Event('storage'));
-  };
-
-  const handleLogin = (user) => {
-    localStorage.setItem('user', JSON.stringify(user));
-    window.dispatchEvent(new Event('storage'));
-  };
-
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   useEffect(() => {
     const handleStorageChange = () => {
@@ -74,22 +61,38 @@ function Navbar() {
     return () => window.removeEventListener('storage', handleStorageChange);
   }, []);
 
+  const handleLogout = () => {
+    localStorage.removeItem('user');
+    window.dispatchEvent(new Event('storage')); // Trigger storage event
+  };
+
+  const handleLogin = (user) => {
+    localStorage.setItem('user', JSON.stringify(user));
+    window.dispatchEvent(new Event('storage')); // Trigger storage event
+  };
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
+  const count = useSelector((state) => state.products);
+
+
   const handleShoppingCartOpen = () => setShoppingCartOpen(true);
   const handleShoppingCartClose = () => setShoppingCartOpen(false);
 
   const handleFavoriteCartOpen = () => setFavoriteCartOpen(true);
   const handleFavoriteCartClose = () => setFavoriteCartOpen(false);
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget); // Open the menu when the user clicks on their name
-  };
+  
+  const Value = useSelector((state) => state.Location.Value);
 
-  const handleClose = () => {
-    setAnchorEl(null); // Close the menu
-  };
+  
+console.log(Value);
+
 
   return (
     <Box>
+    
       {/* Top Bar */}
       <AppBar className="d-none d-lg-block" position="sticky" sx={{ backgroundColor: '#c21760' }}>
         <Box className="container">
@@ -98,13 +101,23 @@ function Navbar() {
               <img style={{ width: '40px' }} src={Headerimg} alt="Header Icon" />
             </Grid>
             <Grid item>
-              <Typography variant="h6" component="div" align="center" sx={{ color: '#fff', fontWeight: 'bold', mx: 1 }}>
+              <Typography
+                variant="h6"
+                component="div"
+                align="center"
+                sx={{ color: '#fff', fontWeight: 'bold', mx: 1 }}
+              >
                 Do you need a business account?
               </Typography>
             </Grid>
             <Grid item>
               <Button
-                sx={{ backgroundColor: '#e21b70', color: '#fff', ml: 1, '&:hover': { backgroundColor: '#c2185b' } }}
+                sx={{
+                  backgroundColor: '#e21b70',
+                  color: '#fff',
+                  ml: 1,
+                  '&:hover': { backgroundColor: '#c2185b' },
+                }}
                 variant="contained"
                 onClick={() => setOpenSignUp(true)}
               >
@@ -116,7 +129,10 @@ function Navbar() {
       </AppBar>
 
       {/* Main Navbar */}
-      <AppBar className="py-2" position="sticky" sx={{ backgroundColor: '#fff', boxShadow: 'none', borderBottom: '1px solid #e0e0e0' }}>
+      <AppBar className=' py-2'
+        position="sticky"
+        sx={{ backgroundColor: '#fff', boxShadow: 'none', borderBottom: '1px solid #e0e0e0' }}
+      >
         <Box className="container">
           <Grid container alignItems="center" justifyContent="space-between" sx={{ height: 64 }}>
             <Grid item>
@@ -126,7 +142,15 @@ function Navbar() {
                     <img style={{ width: isMobile ? '30px' : '35px' }} src={Logo} alt="Logo" />
                   </Grid>
                   <Grid item>
-                    <Typography variant="h6" sx={{ color: '#e21b70', ml: 1, fontWeight: 'bold', fontSize: isMobile ? '16px' : '20px' }}>
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        color: '#e21b70',
+                        ml: 1,
+                        fontWeight: 'bold',
+                        fontSize: isMobile ? '16px' : '20px',
+                      }}
+                    >
                       foodpanda
                     </Typography>
                   </Grid>
@@ -134,53 +158,52 @@ function Navbar() {
               </Link>
             </Grid>
 
+
             <Box sx={{ display: "flex", alignItems: "center" }}>
               <LocationOnIcon sx={{ color: "#ec008c", mr: 1 }} />
-              <Typography variant="body1" sx={{ color: "#000", fontWeight: "bold" }}>
-                Location:{cityName}
+              <Typography
+                variant="body1"
+                sx={{
+                  color: "#000",
+                  fontWeight: "bold",
+                }}
+              >
+                Location: {Value}
               </Typography>
             </Box>
 
+
+            <Grid item>
+              {location?.name && (
+                <Typography variant="body2" color="textSecondary">
+                  <Icon icon="akar-icons:location" /> Location: {location.name}
+                </Typography>
+              )}
+            </Grid>
             <Grid item>
               <Grid container alignItems="center" spacing={1}>
                 {isLoggedIn ? (
                   <>
                     <Grid item>
-                      <Button
-                        aria-controls={openMenu ? 'menu' : undefined}
-                        aria-haspopup="true"
-                        onClick={handleClick}
-                        sx={{ textTransform: 'none', color: '#000', display: 'flex', alignItems: 'center' }}
-                      >
-                        <AccountCircleIcon sx={{ marginRight: 1 }} />
-                        {userName}
-                      </Button>
-                      <Menu
-                        anchorEl={anchorEl}
-                        open={openMenu}
-                        onClose={handleClose}
-                      >
-                        <MenuItem onClick={handleLogout}>Logout</MenuItem>
-                      </Menu>
+                      <Typography className='text-dark' variant="body1">
+                        <AccountCircleIcon />  {userName}
+                      </Typography>
+                    </Grid>
+                    <Grid item>
+                      <Button className='bg-dark' color="inherit" onClick={handleLogout}>Logout</Button>
                     </Grid>
                   </>
                 ) : (
                   <>
                     <Grid item>
-                      <Button className="border border-dark" sx={{ backgroundColor: '#fff', color: '#000' }} onClick={() => setOpenLogin(true)}>
-                        Log In
-                      </Button>
+                      <Button className='border border-dark' sx={{ backgroundColor: '#fff', color: '#000' }} onClick={() => setOpenLogin(true)}>Log In</Button>
                     </Grid>
                     <Grid item>
-                      <Button
-                        sx={{ backgroundColor: '#e21b70', color: '#fff', ml: 1, '&:hover': { backgroundColor: '#c2185b' } }}
-                        onClick={() => setOpenSignUp(true)}
-                      >
-                        Sign Up
-                      </Button>
+                      <Button sx={{ backgroundColor: '#e21b70', color: '#fff', ml: 1, '&:hover': { backgroundColor: '#c2185b' } }} onClick={() => setOpenSignUp(true)}>Sign Up</Button>
                     </Grid>
                   </>
                 )}
+
 
                 <Grid item>
                   <IconButton onClick={handleFavoriteCartOpen}>
@@ -189,6 +212,7 @@ function Navbar() {
                     </Badge>
                   </IconButton>
                 </Grid>
+
 
                 <Grid item>
                   <IconButton onClick={handleShoppingCartOpen}>

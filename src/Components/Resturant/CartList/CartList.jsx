@@ -63,7 +63,7 @@ function CartList({ open, handleClose }) {
         {items.length > 0 && (
           <Box sx={{ padding: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <Typography variant="h6">Total Price:</Typography>
-            <Typography variant="h6" color="primary">${totalPrice.toFixed(2)}</Typography>
+            <Typography variant="h6" color="primary">Rs.{totalPrice.toFixed(2)}</Typography>
           </Box>
         )}
 

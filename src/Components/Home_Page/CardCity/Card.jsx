@@ -1,4 +1,4 @@
-import { Box, Grid, Typography, Button,  } from '@mui/material';
+import { Box, Grid, Typography, Button, } from '@mui/material';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -34,6 +34,7 @@ import Sialkot from '../../../Images/Sialkot.webp';
 import Sukkur from '../../../Images/Sukkur.webp';
 import WahCantt from '../../../Images/WahhCannt.webp';
 import { useDispatch } from 'react-redux';
+import { Addlocation } from '../../Slices/Location';
 
 
 // // City data array
@@ -71,7 +72,7 @@ const cities = [
 ];
 
 const Card = () => {
-   
+    const dispatch = useDispatch();
 
  
 
@@ -83,8 +84,7 @@ const Card = () => {
             <Grid container spacing={2}>
                 {cities.map((city) => (
                     <Grid item xs={6} sm={6} md={4} lg={3} key={city.id}>
-                      <Link to={`/Resturant?city=${city.name}`} style={{ textDecoration: 'none' }}>
-
+                        <Link to={`/Resturant?city?city=${city.name}`} style={{ textDecoration: 'none' }}>
                             <Box
                                 sx={{
                                     height: 180,
@@ -96,8 +96,9 @@ const Card = () => {
                                     boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
                                     position: 'relative',
                                 }}
+                                onClick={() => dispatch(Addlocation(city))}
                             >
-                                <img
+                                <img 
                                     src={city.image}
                                     alt={city.name}
                                     style={{
@@ -138,22 +139,4 @@ const Card = () => {
 };
 
 export default Card;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
