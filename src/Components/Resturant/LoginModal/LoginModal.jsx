@@ -13,9 +13,9 @@ const LoginModal = ({ open, handleClose }) => {
     const handleClickShowPassword = () => setShowPassword(!showPassword);
 
     const onSubmit = (data) => {
-       
         console.log(data);
-        alert("Login successful!"); 
+        handleClose(); // Close the modal after successful login
+        alert("Login successful! Please refresh the page."); // Show the alert
     };
 
     const openSignUpModal = () => {
@@ -34,14 +34,19 @@ const LoginModal = ({ open, handleClose }) => {
                     padding: 4,
                     boxShadow: 24,
                     borderRadius: 2,
-                    width: "20%"
+                    width: '100%',
+                    maxWidth: '400px',
                 }}>
-                    <Typography sx={{  color: '#e21b70',
+                    <Typography sx={{
+                        color: '#e21b70',
                         fontWeight: 'bold',
-                        marginBottom: 2,}} variant="h6" mb={2} align="center">Welcome!</Typography>
-                    <Typography sx={{  color: '#e21b70',
+                        marginBottom: 2,
+                    }} variant="h6" mb={2} align="center">Welcome!</Typography>
+                    <Typography sx={{
+                        color: '#e21b70',
                         fontWeight: 'bold',
-                        marginBottom: 2,}} variant="subtitle1" mb={3} align="center">
+                        marginBottom: 2,
+                    }} variant="subtitle1" mb={3} align="center">
                         Please log in to your account.
                     </Typography>
 
@@ -86,8 +91,7 @@ const LoginModal = ({ open, handleClose }) => {
                         </Typography>
                         <Button
                             fullWidth
-                            variant=""
-                            sx={{ mt: 1 ,backgroundColor : '#000', color:'#fff' }}
+                            sx={{ mt: 1, backgroundColor: '#000', color: '#fff' }}
                             onClick={openSignUpModal} // Open the SignUp modal
                         >
                             Don't have an account? Sign Up

@@ -114,12 +114,12 @@ const OnlineOrder = () => {
           </Grid>
 
           {/* Mobile Image Section */}
-          <Grid
+          <Grid 
             item
             xs={12}
             md={6}
             order={{ xs: 2, md: 2 }}
-            className="position-relative"
+            className="position-relative "
           >
             <Box
               className="position-absolute top-50 start-50 translate-middle mt-5 "

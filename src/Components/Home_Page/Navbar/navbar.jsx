@@ -63,12 +63,12 @@ function Navbar() {
 
   const handleLogout = () => {
     localStorage.removeItem('user');
-    window.dispatchEvent(new Event('storage')); // Trigger storage event
+    window.dispatchEvent(new Event('storage')); 
   };
 
   const handleLogin = (user) => {
     localStorage.setItem('user', JSON.stringify(user));
-    window.dispatchEvent(new Event('storage')); // Trigger storage event
+    window.dispatchEvent(new Event('storage'));
   };
 
   const theme = useTheme();
