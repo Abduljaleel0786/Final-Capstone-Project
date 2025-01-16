@@ -84,7 +84,21 @@ const SignUpModal = ({ open, handleClose }) => {
                         label="Password"
                         variant="outlined"
                         margin="normal"
-                        {...register('password', { required: 'Password is required' })}
+                        {...register('password', {
+                            required: 'Password is required',
+                            minLength: {
+                                value: 6,
+                                message: 'Password must be at least 6 characters',
+                            },
+                            maxLength: {
+                                value: 10,
+                                message: 'Password must be no more than 10 characters',
+                            },
+                            pattern: {
+                                value: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{6,10}$/,
+                                message: 'Password must include at least one uppercase letter, one lowercase letter, one number, and one special character.',
+                            },
+                        })}
                         error={!!errors.password}
                         helperText={errors.password?.message}
                         sx={{ marginBottom: 2 }}
@@ -144,4 +158,3 @@ const SignUpModal = ({ open, handleClose }) => {
 };
 
 export default SignUpModal;
-

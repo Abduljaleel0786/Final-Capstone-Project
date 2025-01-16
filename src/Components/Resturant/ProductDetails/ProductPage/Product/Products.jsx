@@ -1,19 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import {
-  Box,
-  Typography,
-  Grid,
-  CircularProgress,
-  Card,
-  CardContent,
-  CardMedia,
-  Tooltip,
-  Modal,
-  TextField,
-  Button,
-  IconButton,
+import { Box, Typography, Grid, CircularProgress, Card, CardContent, CardMedia, Tooltip, Modal, TextField, Button, IconButton,
 } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
@@ -132,95 +120,104 @@ const Product = () => {
         </Typography>
       ) : (
 
-        <Grid container spacing={1}>
-          {products.map((product) => (
-            <Grid item xs={12} sm={6} md={4} key={product.idMeal}>
-              <Card
-                sx={{
-                  display: "flex",
-                  flexDirection: "row",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  padding: "20px",
-                  boxShadow: 3,
-                  borderRadius: "12px",
-                  overflow: "hidden",
-                  height: "auto",
-                  backgroundColor: "#fff",
-                  transition: "transform 0.3s",
-                  "&:hover": { transform: "scale(1.02)" },
-                }}
-              >
-                <CardMedia
-                  component="img"
-                  sx={{
-                    height: "80px",
-                    width: "80px",
-                    borderRadius: "8px",
-                  }}
-                  image={product.strMealThumb}
-                  alt={product.strMeal}
-                />
-                <CardContent
-                  sx={{
-                    flex: "1",
-                    marginLeft: "16px",
-                  }}
-                >
-                  {/* Tooltip for Product Name */}
-                  <Tooltip title={product.strMeal}>
-                    <Typography
-                      variant="h6"
-                      sx={{
-                        fontWeight: "bold",
-                        whiteSpace: "nowrap",
-                        overflow: "hidden",
-                        textOverflow: "ellipsis",
-                        maxWidth: "200px",
-                      }}
-                    >
-                      {product.strMeal.length > 12
-                        ? product.strMeal.slice(0, 12) + "..."
-                        : product.strMeal}
-                    </Typography>
-                  </Tooltip>
-                  <Typography variant="body2" color="textSecondary">
-                    Rs. 450
-                  </Typography>
+        
 
-                </CardContent>
-                <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
-                  {/* Add to Favorite Button */}
-                  <Tooltip title="Add to Favorites">
-                    <IconButton
-                      onClick={() => handleAddToFavorite(product)}
-                      sx={{
-                        backgroundColor: "#FFAB40",
-                        color: "#fff",
-                        "&:hover": { backgroundColor: "#FF9100" },
-                      }}
-                    >
-                      <FavoriteBorderIcon />
-                    </IconButton>
-                  </Tooltip>
-                  {/* Add to Cart Button */}
-                  <Tooltip title="Add to Cart">
-                    <IconButton
-                      onClick={() => handleAddToCart(product)}
-                      sx={{
-                        backgroundColor: "#FF4081",
-                        color: "#fff",
-                        "&:hover": { backgroundColor: "#e91e63" },
-                      }}
-                    >
-                      <AddShoppingCartIcon />
-                    </IconButton>
-                  </Tooltip>
-                </Box>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
+        <Grid container spacing={2}>
+  {products.map((product) => (
+    <Grid
+      item
+      xs={12} 
+      sm={6} 
+      md={6} 
+      lg={6} 
+      xl={4} 
+      key={product.idMeal}
+    >
+      <Card
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+          padding: "12px",
+          boxShadow: 3,
+          borderRadius: "12px",
+          overflow: "hidden",
+          height: "auto",
+          backgroundColor: "#fff",
+          transition: "transform 0.3s",
+          "&:hover": { transform: "scale(1.02)" },
+        }}
+      >
+        <CardMedia
+          component="img"
+          sx={{
+            height: "80px",
+            width: "80px",
+            borderRadius: "8px",
+          }}
+          image={product.strMealThumb}
+          alt={product.strMeal}
+        />
+        <CardContent
+          sx={{
+            flex: "1",
+            marginLeft: "12px",
+          }}
+        >
+          {/* Tooltip for Product Name */}
+          <Tooltip title={product.strMeal} arrow>
+            <Typography
+              variant="h6"
+              sx={{
+                fontWeight: "bold",
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                maxWidth: "100px",
+              }}
+            >
+              {product.strMeal.length > 10
+                ? product.strMeal.slice(0, 10) + "..."
+                : product.strMeal}
+            </Typography>
+          </Tooltip>
+          <Typography variant="body2" color="textSecondary">
+            Rs. 450
+          </Typography>
+        </CardContent>
+        <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+          {/* Add to Favorite Button */}
+          <Tooltip title="Add to Favorites" arrow>
+            <IconButton
+              onClick={() => handleAddToFavorite(product)}
+              sx={{
+                backgroundColor: "#FFAB40",
+                color: "#fff",
+                "&:hover": { backgroundColor: "#FF9100" },
+              }}
+            >
+              <FavoriteBorderIcon />
+            </IconButton>
+          </Tooltip>
+          {/* Add to Cart Button */}
+          <Tooltip title="Add to Cart" arrow>
+            <IconButton
+              onClick={() => handleAddToCart(product)}
+              sx={{
+                backgroundColor: "#FF4081",
+                color: "#fff",
+                "&:hover": { backgroundColor: "#e91e63" },
+              }}
+            >
+              <AddShoppingCartIcon />
+            </IconButton>
+          </Tooltip>
+        </Box>
+      </Card>
+    </Grid>
+  ))}
+</Grid>
 
       )}
 

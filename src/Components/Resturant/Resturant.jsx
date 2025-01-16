@@ -24,11 +24,9 @@ import Resturant7 from '../../Images/Restuant 07.webp';
 import Resturant8 from '../../Images/Resturant 08.webp';
 import Resturant9 from '../../Images/Resturant 09.webp';
 import Resturant10 from '../../Images/Resturant 10.webp';
-import Navbar from "../Home_Page/Navbar/navbar";
 import Footer from "../Home_Page/Footer/Footer";
 
 const Restaurant = () => {
-
     const navigate = useNavigate();
     const [openModal, setOpenModal] = useState(false);
     const [selectedRestaurant, setSelectedRestaurant] = useState(null);
@@ -125,8 +123,7 @@ const Restaurant = () => {
 
     return (
         <Box>
-
-
+        
             <Box
                 sx={{
                     display: "flex",
@@ -206,6 +203,41 @@ const Restaurant = () => {
                     ))}
                 </Grid>
             </Container>
+
+            <Modal open={openModal} onClose={handleClose}>
+                <Box
+                    sx={{
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                        width: 400,
+                        bgcolor: "background.paper",
+                        boxShadow: 24,
+                        p: 4,
+                        borderRadius: "12px",
+                        textAlign: "center",
+                    }}
+                >
+                    <Typography variant="h5" mb={2}>
+                        {selectedRestaurant} is currently closed.
+                    </Typography>
+                    <Button
+                        onClick={handleClose}
+                        sx={{
+                            mt: 2,
+                            backgroundColor: "#ff69b4",
+                            color: "white",
+                            '&:hover': {
+                                backgroundColor: "#ff85c2",
+                            },
+                        }}
+                    >
+                        Close
+                    </Button>
+                </Box>
+            </Modal>
+
             <Footer />
         </Box>
     );
